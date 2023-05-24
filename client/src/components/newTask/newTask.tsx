@@ -53,49 +53,52 @@ const NewTask: React.FC<Props> = ({ tasks, setTasks }) => {
           type="text"
           name="title"
           placeholder="Task title"
-          className="input__field"
+          className="input__field mb-3"
           value={newTaskState?.title}
           onChange={handleInputChange}
         />
         <textarea
           name="description"
           rows={2}
-          placeholder="Task description..."
-          className="input__field"
+          placeholder="Task description"
+          className="input__field mb-2"
           value={newTaskState?.description}
           onChange={handleInputChange}
         />
-        <Row className="d-flex flex-row justify-content-between m-0 p-0">
-          <Col style={{ color: "gray", padding: "0 .5rem" }}>
-            Start Date:&nbsp;&nbsp;&nbsp;
-            <input
-              type="date"
-              name="startDate"
-              style={{ border: "none" }}
-              onChange={handleDateChange}
-            />
+        <Row className=" m-0 p-0">
+          <Col className="p-0 pr-3" lg={3}>
+            <div className="input__field--date">
+              Start Date:&nbsp;&nbsp;&nbsp;
+              <input
+                type="date"
+                name="startDate"
+                style={{ border: "none" }}
+                onChange={handleDateChange}
+              />
+            </div>
           </Col>
-          <Col style={{ color: "gray", padding: "0 .5rem" }}>
-            Finish Date:&nbsp;&nbsp;&nbsp;
-            <input
-              type="date"
-              name="endDate"
-              style={{ border: "none" }}
-              onChange={handleDateChange}
-            />
+          <Col className="p-0 pl-1 pr-2" lg={3}>
+            <div className="input__field--date">
+              Finish Date:&nbsp;&nbsp;&nbsp;
+              <input
+                type="date"
+                name="endDate"
+                style={{ border: "none" }}
+                onChange={handleDateChange}
+              />
+            </div>
+          </Col>
+          <Col lg={6} className="p-0 d-flex justify-content-end">
+            <Button
+              variant="info"
+              type="submit"
+              className="submit__button"
+              onClick={submitNewTask}
+            >
+              Submit
+            </Button>
           </Col>
         </Row>
-
-        <div className="d-flex flex-row justify-content-end">
-          <Button
-            variant="info"
-            type="submit"
-            className="submit__button"
-            onClick={submitNewTask}
-          >
-            Submit
-          </Button>
-        </div>
       </form>
     </>
   );

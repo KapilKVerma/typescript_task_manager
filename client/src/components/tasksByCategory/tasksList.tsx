@@ -14,7 +14,7 @@ const TasksList: React.FC<Props> = ({ taskList }) => {
         {taskList.map((task) => {
           return (
             <ListGroup.Item
-              className="d-flex flex-row justify-content-between"
+              className="d-flex flex-row justify-content-between p-0"
               style={{ position: "relative" }}
               key={task.id}
             >

@@ -76,7 +76,7 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
         <Row>
           <Col lg={3} md={6}>
             <Button
-              variant="outline-info"
+              variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.today ? true : false}
               onClick={() => {
@@ -89,7 +89,7 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
           </Col>
           <Col lg={3} md={6}>
             <Button
-              variant="outline-info"
+              variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.remaining ? true : false}
               onClick={() => {
@@ -102,7 +102,7 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
           </Col>
           <Col lg={3} md={6}>
             <Button
-              variant="outline-info"
+              variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.completed ? true : false}
               onClick={() => {
@@ -115,7 +115,7 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
           </Col>
           <Col lg={3} md={6}>
             <Button
-              variant="outline-info"
+              variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.showAll ? true : false}
               onClick={() => {
@@ -133,7 +133,15 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
         {activeButton !== taskCategory.showAll ? (
           <TasksList taskList={taskList} />
         ) : (
-          <TasksTable tasks={taskList} />
+          <div
+            style={{
+              background: "white",
+              borderRadius: "5px",
+              padding: ".5rem",
+            }}
+          >
+            <TasksTable tasks={taskList} />
+          </div>
         )}
       </div>
     </>

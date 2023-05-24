@@ -1,15 +1,40 @@
 .App {
-  padding: 1rem;
+  padding: 0;
   margin: 0;
   box-sizing: border-box;
-  margin: 0 20%;
   font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.App__body {
+  margin: 5rem 5%;
+  height: 82vh;
+  background: rgb(4, 202, 212);
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  padding: 10px;
+  box-shadow: 5px 5px #888888;
+}
+
+.App__header--circle {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.App__body--content {
+  margin: 0 10%;
 }
 
 .task__form {
   border: 1px solid rgb(223, 223, 223);
   border-radius: 5px;
   padding: 5px;
+  background-color: white;
 }
 
 .input__field {
@@ -18,10 +43,36 @@
   margin: calc(100%-0.5rem);
   width: 100%;
   box-sizing: inherit;
+  background: rgba(23, 162, 184, 0.1);
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .input__field:focus {
   outline: none;
+}
+
+.input__field--edit {
+  border: none;
+  padding: 0.5rem;
+  margin: calc(100%-0.5rem);
+  width: 100%;
+  box-sizing: inherit;
+  background: rgba(23, 162, 184, 0.1);
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.input__field--edit:focus {
+  outline-style: solid;
+  outline-color: rgb(23, 162, 184);
+}
+
+.input__field--date {
+  color: gray;
+  padding: 0.5rem;
+  background: rgba(23, 162, 184, 0.1);
+  border-radius: 5px;
 }
 
 .submit__button {
@@ -36,30 +87,63 @@
   margin: 0.5rem 0;
 }
 
-.task__lable {
-  width: 100%;
-  padding: 0.35rem 0.5rem;
-  border-radius: 50px;
-  font-weight: 600;
+.task__menu--container {
+  position: absolute;
+  right: 0;
+}
+
+.task__menu--container2 {
+  position: absolute;
+  right: 0;
+}
+
+.task__menu--list {
+  position: absolute;
+  right: 0;
+  top: 3rem;
+  border: 1px solid rgb(223, 223, 223);
+  padding: 0.25rem;
+  border-radius: 5px;
+  background: white;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 600px) {
+@media only screen and (min-width: 600px) {
   .App {
     margin: 0 2%;
+  }
+  .task__menu--container {
+    display: none;
+  }
+  .task__menu--container2 {
+    display: block;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 900px) {
   .App {
     margin: 0 10%;
+  }
+  .task__menu--container {
+    display: none;
+  }
+  .task__menu--container2 {
+    display: block;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (max-width: 992px) {
+@media only screen and (min-width: 992px) {
   .App {
-    margin: 0 15%;
+    margin: 0;
+  }
+  .task__menu--container {
+    display: block;
+  }
+  .task__menu--container2 {
+    display: none;
   }
 }

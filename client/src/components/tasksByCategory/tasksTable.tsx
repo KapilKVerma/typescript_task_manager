@@ -9,7 +9,7 @@ interface Props {
 
 const TasksTable: React.FC<Props> = ({ tasks }) => {
   return (
-    <Table responsive bordered>
+    <Table responsive bordered style={{ background: "white" }}>
       <thead>
         <tr>
           {Array.from({ length: 12 }).map((_, index) => {

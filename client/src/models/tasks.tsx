@@ -11,7 +11,8 @@ export type Task = {
 export const tasks: Task[] = [
   {
     id: 1,
-    title: "Finish project proposal",
+    title:
+      "Finish project proposal Write a detailed proposal for the upcoming project Finish project proposal Write a detailed proposal for the upcoming project",
     description: "Write a detailed proposal for the upcoming project",
     startDate: new Date("2023-05-23"),
     endDate: new Date("2023-06-01"),

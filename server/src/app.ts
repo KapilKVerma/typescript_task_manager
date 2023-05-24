@@ -1,9 +1,17 @@
-require("dotenv").config()
-import express from 'express'
-import config from 'config'
+require("dotenv").config();
+import express from "express";
+import config from "config";
+import connectToDb from "./utils/connecttToDb";
+import log from "./utils/logger";
+import router from "./routes";
 
-const app = express()
+const app = express();
 
-const PORT = config.get('port')
+app.use(router);
 
-app.listen(PORT,()=>{console.log(`App started at http://localhost:${PORT}`)})
+const PORT = config.get("port");
+
+app.listen(PORT, () => {
+  log.info(`App started at http://localhost:${PORT}`);
+  connectToDb();
+});
