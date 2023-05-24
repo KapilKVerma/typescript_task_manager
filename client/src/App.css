@@ -1,0 +1,65 @@
+.App {
+  padding: 1rem;
+  margin: 0;
+  box-sizing: border-box;
+  margin: 0 20%;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.task__form {
+  border: 1px solid rgb(223, 223, 223);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.input__field {
+  border: none;
+  padding: 0.5rem;
+  margin: calc(100%-0.5rem);
+  width: 100%;
+  box-sizing: inherit;
+}
+
+.input__field:focus {
+  outline: none;
+}
+
+.submit__button {
+  padding: 0.4rem 1.5rem;
+}
+
+.category__button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.task__lable {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 600px) {
+  .App {
+    margin: 0 2%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .App {
+    margin: 0 10%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  .App {
+    margin: 0 15%;
+  }
+}
