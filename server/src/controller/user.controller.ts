@@ -9,7 +9,7 @@ export async function createUserHandler(
   const body = req.body;
 
   try {
-    // const user = await createUser(body);
+    const user = await createUser(body);
 
     // await sendEmail({
     //   to: user.email,
@@ -19,11 +19,10 @@ export async function createUserHandler(
     // });
 
     return res.send("User successfully created");
-  } catch (e: any) {
-    if (e.code === 11000) {
+  } catch (err: any) {
+    if (err.code === 11000) {
       return res.status(409).send("Account already exists");
     }
-
-    return res.status(500).send(e);
+    return res.status(500).send(err);
   }
 }

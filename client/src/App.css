@@ -1,40 +1,47 @@
 .App {
-  padding: 0;
+  padding: 1rem;
   margin: 0;
   box-sizing: border-box;
   font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url(https://images.unsplash.com/photo-1656274404460-14427bdd5fff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1992&q=80);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+}
+.App__header {
+  background: rgba(255, 126, 131, 0.25);
+  border-radius: 22px;
+  padding: 1rem;
+  position: relative;
 }
 
 .App__body {
-  margin: 5rem 5%;
-  height: 82vh;
-  background: rgb(4, 202, 212);
-  border-radius: 10px;
-  padding: 2rem;
-  position: relative;
-  padding: 10px;
-  box-shadow: 5px 5px #888888;
+  margin: 0;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  box-shadow: 1px 1px 3px 3px rgba(255, 255, 255, 0.25);
 }
 
 .App__header--circle {
   position: absolute;
-  right: 1rem;
-  top: 1rem;
-  height: 1.5rem;
-  width: 1.5rem;
+  right: 1.5rem;
+  top: 1.5rem;
+  height: 1.75rem;
+  width: 1.75rem;
   border-radius: 50px;
-  background-color: white;
+  background-color: rgb(170, 165, 220);
 }
 
 .App__body--content {
-  margin: 0 10%;
 }
 
 .task__form {
-  border: 1px solid rgb(223, 223, 223);
+  border: 1px solid rgba(223, 223, 223, 0.5);
   border-radius: 5px;
-  padding: 5px;
-  background-color: white;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .input__field {
