@@ -2,13 +2,9 @@ import React, { useState, useCallback } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { Task } from "../../models/tasks";
+import { tasks, Task } from "../../models/task.model";
 import TasksList from "./tasksList";
 import TasksTable from "./tasksTable";
-
-interface Props {
-  tasks: Task[];
-}
 
 enum taskCategory {
   today,
@@ -19,7 +15,7 @@ enum taskCategory {
 
 const cDate = new Date(); // Current Date
 
-const TasksByCategory: React.FC<Props> = ({ tasks }) => {
+const Tasks: React.FC = () => {
   const [taskList, setTaskList] = useState<Task[]>(
     tasks.filter((task: Task) => {
       if (new Date(task.startDate).toDateString() === cDate.toDateString()) {
@@ -69,10 +65,11 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
 
     setTaskList(result);
   };
-
   return (
     <>
+      {/* Tasks  Categories*/}
       <div className="mb-3">
+        <h4>Tasks</h4>
         <Row>
           <Col lg={3} md={6}>
             <Button
@@ -129,6 +126,7 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
         </Row>
       </div>
 
+      {/* Tasks List */}
       <div className="mb-3">
         {activeButton !== taskCategory.showAll ? (
           <TasksList taskList={taskList} />
@@ -148,4 +146,4 @@ const TasksByCategory: React.FC<Props> = ({ tasks }) => {
   );
 };
 
-export default TasksByCategory;
+export default Tasks;

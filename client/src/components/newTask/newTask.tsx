@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { Task } from "../../models/tasks";
+import { Task } from "../../models/task.model";
 
 interface Props {
   tasks: Task[];

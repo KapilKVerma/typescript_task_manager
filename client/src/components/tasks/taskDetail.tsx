@@ -3,7 +3,8 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BiTrash, BiEdit, BiCheck, BiDetail, BiMenu } from "react-icons/bi";
-import { Task } from "../../models/tasks";
+
+import { Task } from "../../models/task.model";
 
 interface Props {
   task: Task;

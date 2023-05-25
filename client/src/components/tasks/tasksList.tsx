@@ -1,6 +1,6 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Task } from "../../models/tasks";
+import { Task } from "../../models/task.model";
 import TaskDetail from "./taskDetail";
 
 interface Props {

@@ -9,11 +9,24 @@
   background-size: cover;
   min-height: 100vh;
 }
+
 .App__header {
   background: rgba(255, 126, 131, 0.25);
   border-radius: 22px;
   padding: 1rem;
-  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.App__header__user--image {
+  height: 2.5rem;
+  width: 2.5rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  margin: 1rem;
 }
 
 .App__body {
@@ -24,17 +37,13 @@
   box-shadow: 1px 1px 3px 3px rgba(255, 255, 255, 0.25);
 }
 
-.App__header--circle {
-  position: absolute;
-  right: 1.5rem;
-  top: 1.5rem;
-  height: 1.75rem;
-  width: 1.75rem;
-  border-radius: 50px;
-  background-color: rgb(170, 165, 220);
+.App__body--sidebar {
+  position: fixed;
+  z-index: 1;
 }
 
 .App__body--content {
+  padding: 0 1rem;
 }
 
 .task__form {
@@ -94,6 +103,13 @@
   margin: 0.5rem 0;
 }
 
+.task__card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 1rem;
+  position: relative;
+}
+
 .task__menu--container {
   position: absolute;
   right: 0;
@@ -116,11 +132,92 @@
   z-index: 1;
 }
 
+.graph__card {
+  background-color: rgba(123, 172, 229, 0.5);
+  border-radius: 5px;
+  padding: 1rem;
+  position: relative;
+}
+
+.graph__card2 {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 2rem;
+  height: 25rem;
+  position: relative;
+}
+
+.division__card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 3rem;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.division__card--icon {
+  background-color: rgb(234, 90, 146);
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  position: absolute;
+  top: -30px;
+}
+
+.project__card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 3rem;
+  position: relative;
+  margin-top: 2rem;
+}
+
+.project__card--icon {
+  background-color: rgba(23, 195, 165, 1);
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  position: absolute;
+  top: -30px;
+}
+
+.team__member__card {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.team__member__card--image {
+  height: 5rem;
+  width: 5rem;
+  margin: 1rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.member__skills--container {
+  background: rgba(23, 162, 184, 0.1);
+  border-radius: 10px;
+  padding: 0.5rem;
+}
+
+.member__skills--list {
+  display: inline-flex;
+  padding: 0.5rem;
+}
+
+.member__skills--tag {
+  border: 1px solid rgb(52, 58, 64);
+  border-radius: 50px;
+  padding: 0.35rem 1rem;
+  margin: 0.25rem;
+}
+
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 600px) {
-  .App {
-    margin: 0 2%;
-  }
   .task__menu--container {
     display: none;
   }
@@ -131,9 +228,6 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 900px) {
-  .App {
-    margin: 0 10%;
-  }
   .task__menu--container {
     display: none;
   }
@@ -144,9 +238,6 @@
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .App {
-    margin: 0;
-  }
   .task__menu--container {
     display: block;
   }
