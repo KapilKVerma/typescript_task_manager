@@ -13,11 +13,11 @@ const TeamMembers: React.FC = () => {
       <div className="d-flex flex-row justify-content-between">
         <h4>Team Members</h4>
         <div className="d-flex flex-row justify-content-end">
-          <Button size="sm" variant="light" onClick={() => setListView(true)}>
+          <Button variant="light" onClick={() => setListView(true)}>
             <BsListUl size={"1.25rem"} />
           </Button>
           <div className="m-1" />
-          <Button size="sm" variant="light" onClick={() => setListView(false)}>
+          <Button variant="light" onClick={() => setListView(false)}>
             <BsGrid size={"1.25rem"} />
           </Button>
         </div>

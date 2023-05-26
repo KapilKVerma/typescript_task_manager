@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import { navLink } from "../../models/nav.link";
 import { BiArrowFromRight } from "react-icons/bi";
 import { AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 interface Props {
   showNavTitles: Boolean;
@@ -11,18 +12,22 @@ interface Props {
 }
 const NavBar: React.FC<Props> = (props) => {
   const { showNavTitles, navLinks, setShowNavTitles } = props;
+
   return (
     <>
       {navLinks.map((link, index) => {
         return (
-          <Button
-            variant="light"
-            className="w-100 text-left mb-2 p-3 font-weight-bold"
-            key={index}
-          >
-            {link.icon}
-            {showNavTitles ? <span>&nbsp;&nbsp;{link.title}</span> : null}
-          </Button>
+          <Link to={link.path}>
+            <Button
+              variant="light"
+              className="w-100 text-left mb-2 p-3 font-weight-bold"
+              key={index}
+              // onClick={() => navigate(link.path)}
+            >
+              {link.icon}
+              {showNavTitles ? <>&nbsp;&nbsp;{link.title}</> : null}
+            </Button>
+          </Link>
         );
       })}
 

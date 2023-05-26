@@ -1,46 +1,45 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import Dashboard from "../dashboard/dashboard";
-import Projects from "../projects/projects";
-import Divisions from "../divisions/divisions";
-import WorkBoard from "../workboard/workBoard";
-import Tasks from "../tasks/tasks";
-import TeamMembers from "../teamMembers/teamMembers";
+const Dashboard = lazy(() => import("../dashboard/dashboard"));
+const Projects = lazy(() => import("../projects/projects"));
+const Tasks = lazy(() => import("../tasks/tasks"));
+const WorkBoard = lazy(() => import("../workboard/workboard"));
+const Divisions = lazy(() => import("../divisions/divisions"));
+const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
+const Admin = lazy(() => import("../admin/admin"));
 
-const TasksByCategory: React.FC = () => {
+const Router: React.FC = () => {
+  const AppRoutes = [
+    { path: "/", component: Dashboard },
+    { path: "/dashboard", component: Dashboard },
+    { path: "/projects", component: Projects },
+    { path: "/tasks", component: Tasks },
+    { path: "/workboard", component: WorkBoard },
+    { path: "/divisions", component: Divisions },
+    { path: "/teamMembers", component: TeamMembers },
+    { path: "/admin", component: Admin },
+  ];
+
+  const Loading: React.FC = () => <p>Loading ...</p>;
+
   return (
     <>
-      {/* Dashboard */}
-      <div>
-        <Dashboard />
-      </div>
-
-      {/* Divisions */}
-      <div className="mb-3">
-        <Divisions />
-      </div>
-
-      {/* Projects */}
-      <div className="mb-3">
-        <Projects />
-      </div>
-
-      {/* Team members */}
-      <div className="mb-3">
-        <TeamMembers />
-      </div>
-
-      {/* Tasks List */}
-      <div>
-        <Tasks />
-      </div>
-
-      {/* Workboard */}
-      <div>
-        <WorkBoard />
-      </div>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          {AppRoutes.map((route, index) => {
+            return (
+              <Route
+                path={route.path}
+                element={<route.component />}
+                key={index}
+              />
+            );
+          })}
+        </Routes>
+      </Suspense>
     </>
   );
 };
 
-export default TasksByCategory;
+export default Router;

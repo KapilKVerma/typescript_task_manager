@@ -6,7 +6,7 @@ import { tasks } from "../../models/task.model";
 import { projects } from "../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
 
-const WorkBoard: React.FC = () => {
+const Workboard: React.FC = () => {
   return (
     <>
       <h4 className="mb-0">Workboard</h4>
@@ -135,9 +135,9 @@ const WorkBoard: React.FC = () => {
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="m-0 p-3">
+        <Col lg={3} className="m-0">
           <Row className="p-2">
-            {projects.map((project, index) => {
+            {projects.slice(0, 2).map((project, index) => {
               return (
                 <Col key={index} className="m-0 p-2">
                   <div className="project__card">
@@ -177,4 +177,4 @@ const WorkBoard: React.FC = () => {
   );
 };
 
-export default WorkBoard;
+export default Workboard;

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { BiTrash, BiEdit, BiCheck, BiDetail, BiMenu } from "react-icons/bi";
-
+import { BiTrash, BiEdit, BiCheck, BiDetail } from "react-icons/bi";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { Task } from "../../models/task.model";
 
 interface Props {
@@ -18,7 +16,7 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
   return (
     <>
       {!editTask ? (
-        <>
+        <div style={{ position: "relative" }}>
           <div style={{ width: "80%" }} className="p-2">
             <section>
               <p className="text-capitalize">
@@ -47,7 +45,11 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
 
                   <ul
                     className="d-flex flex-row justify-content-start"
-                    style={{ listStyleType: "none", padding: "0", margin: "0" }}
+                    style={{
+                      listStyleType: "none",
+                      padding: "0",
+                      margin: "0",
+                    }}
                   >
                     <li style={{ width: "15rem" }}>
                       Start Date:&nbsp;&nbsp;{task.endDate.toDateString()}
@@ -60,7 +62,7 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
               ) : null}
             </section>
           </div>
-          <div className="task__menu--container p-2">
+          <div className="task__menu--container">
             <Button size="sm" variant="light">
               <BiCheck size={"1.25rem"} />
             </Button>
@@ -71,15 +73,13 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
               <BiTrash size={"1.25rem"} />
             </Button>
           </div>
-          <div className="task__menu--container2 p-2">
+          <div className="task__menu--container2">
             <Button
               size="sm"
               variant="light"
-              onClick={() => {
-                setShowMenuItems(!showMenuItems);
-              }}
+              onClick={() => setShowMenuItems(!showMenuItems)}
             >
-              <BiMenu size={"1.25rem"} />
+              <HiOutlineMenuAlt2 size={"1.25rem"} />
             </Button>
           </div>
           <div
@@ -111,7 +111,7 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
               &nbsp;&nbsp;Delete
             </Button>
           </div>
-        </>
+        </div>
       ) : null}
 
       {editTask ? (

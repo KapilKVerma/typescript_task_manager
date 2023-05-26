@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { tasks, Task } from "../../models/task.model";
 import TasksList from "./tasksList";
 import TasksTable from "./tasksTable";
+import NewTask from "../forms/newTask/newTask";
 
 enum taskCategory {
   today,
@@ -24,6 +25,7 @@ const Tasks: React.FC = () => {
     })
   );
   const [activeButton, setActiveButton] = useState<number>(0);
+  const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
 
   const todaysTasksCalculator = useCallback(
     (tasks: Task[]): number => {
@@ -65,65 +67,77 @@ const Tasks: React.FC = () => {
 
     setTaskList(result);
   };
+
+  const hanldeClick = (tasks: Task[], category: number) => {
+    filterTasks(tasks, category);
+    setActiveButton(category);
+    setShowNewTaskForm(false);
+  };
+
   return (
     <>
-      {/* Tasks  Categories*/}
-      <div className="mb-3">
-        <h4>Tasks</h4>
-        <Row>
-          <Col lg={3} md={6}>
-            <Button
-              variant="outline-dark"
-              className="category__button"
-              active={activeButton === taskCategory.today ? true : false}
-              onClick={() => {
-                filterTasks(tasks, taskCategory.today);
-                setActiveButton(taskCategory.today);
-              }}
-            >
-              Today's Tasks ({todaysTasksCalculator(tasks)})
-            </Button>
-          </Col>
-          <Col lg={3} md={6}>
-            <Button
-              variant="outline-dark"
-              className="category__button"
-              active={activeButton === taskCategory.remaining ? true : false}
-              onClick={() => {
-                filterTasks(tasks, taskCategory.remaining);
-                setActiveButton(taskCategory.remaining);
-              }}
-            >
-              Remaining ({tasksCalculator(tasks, false)})
-            </Button>
-          </Col>
-          <Col lg={3} md={6}>
-            <Button
-              variant="outline-dark"
-              className="category__button"
-              active={activeButton === taskCategory.completed ? true : false}
-              onClick={() => {
-                filterTasks(tasks, taskCategory.completed);
-                setActiveButton(taskCategory.completed);
-              }}
-            >
-              Completed ({tasksCalculator(tasks, true)})
-            </Button>
-          </Col>
-          <Col lg={3} md={6}>
-            <Button
-              variant="outline-dark"
-              className="category__button"
-              active={activeButton === taskCategory.showAll ? true : false}
-              onClick={() => {
-                filterTasks(tasks, taskCategory.showAll);
-                setActiveButton(taskCategory.showAll);
-              }}
-            >
-              Show All ({tasks.length})
-            </Button>
-          </Col>
-        </Row>
+      {/* Tasks  Header*/}
+      <div className="d-flex flex-row justify-content-between mb-3">
+        <div className="w-50 d-flex flex-row justify-content-start">
+          <Button
+            variant="outline-dark"
+            className="category__button"
+            active={activeButton === taskCategory.today ? true : false}
+            onClick={() => hanldeClick(tasks, taskCategory.today)}
+          >
+            Today's ({todaysTasksCalculator(tasks)})
+          </Button>
+          <div className="m-1"></div>
+          <Button
+            variant="outline-dark"
+            className="category__button"
+            active={activeButton === taskCategory.remaining ? true : false}
+            onClick={() => hanldeClick(tasks, taskCategory.remaining)}
+          >
+            Remaining ({tasksCalculator(tasks, false)})
+          </Button>
+          <div className="m-1"></div>
+          <Button
+            variant="outline-dark"
+            className="category__button"
+            active={activeButton === taskCategory.completed ? true : false}
+            onClick={() => hanldeClick(tasks, taskCategory.completed)}
+          >
+            Completed ({tasksCalculator(tasks, true)})
+          </Button>
+          <div className="m-1"></div>
+          <Button
+            variant="outline-dark"
+            className="category__button"
+            active={activeButton === taskCategory.showAll ? true : false}
+            onClick={() => hanldeClick(tasks, taskCategory.showAll)}
+          >
+            Show All ({tasks.length})
+          </Button>
+        </div>
+
+        <div
+          className="w-50  d-flex flex-row justify-content-end"
+          style={{ position: "relative" }}
+        >
+          <Button
+            variant="info"
+            onClick={() => {
+              setShowNewTaskForm(!showNewTaskForm);
+            }}
+          >
+            {showNewTaskForm ? <span>Close</span> : <span>New Task</span>}
+          </Button>
+          {showNewTaskForm ? (
+            <div className="new__task__container">
+              <NewTask
+                tasks={taskList}
+                setTasks={setTaskList}
+                setClose={setShowNewTaskForm}
+              />
+            </div>
+          ) : null}
+        </div>
       </div>
 
       {/* Tasks List */}
@@ -131,15 +145,7 @@ const Tasks: React.FC = () => {
         {activeButton !== taskCategory.showAll ? (
           <TasksList taskList={taskList} />
         ) : (
-          <div
-            style={{
-              background: "white",
-              borderRadius: "5px",
-              padding: ".5rem",
-            }}
-          >
-            <TasksTable tasks={taskList} />
-          </div>
+          <TasksTable tasks={taskList} />
         )}
       </div>
     </>
