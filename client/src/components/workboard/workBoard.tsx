@@ -92,7 +92,7 @@ const Workboard: React.FC = () => {
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="p-1 pl-3">
+        <Col lg={3} className="p-1 pl-4">
           <div
             className="workboard__tasks__header"
             style={{ backgroundColor: "rgb(23,195,165)", color: "#fff" }}

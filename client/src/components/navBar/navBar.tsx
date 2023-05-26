@@ -20,10 +20,13 @@ const NavBar: React.FC<Props> = (props) => {
           <Link to={link.path}>
             <Button
               variant="light"
-              className="w-100 text-left mb-2 p-3 font-weight-bold"
-              style={{ minWidth: "3.5rem" }}
+              className="w-100 mb-2 p-3"
+              style={{
+                width: `${showNavTitles ? "4rem" : "100%"}`,
+                textAlign: `${showNavTitles ? "left" : "center"}`,
+                fontWeight: "500",
+              }}
               key={index}
-              // onClick={() => navigate(link.path)}
             >
               {link.icon}
               {showNavTitles ? <>&nbsp;&nbsp;{link.title}</> : null}
@@ -35,10 +38,10 @@ const NavBar: React.FC<Props> = (props) => {
       <Button
         variant="light"
         className="p-3 text-center"
-        style={{ width: "3.5rem" }}
-        onClick={() => {
-          setShowNavTitles(!showNavTitles);
+        style={{
+          width: `${showNavTitles ? "4rem" : "100%"}`,
         }}
+        onClick={() => setShowNavTitles(!showNavTitles)}
       >
         {showNavTitles ? (
           <BiArrowFromRight size={"1.25rem"} />

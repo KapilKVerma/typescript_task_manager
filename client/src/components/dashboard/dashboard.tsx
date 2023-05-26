@@ -23,13 +23,12 @@ const Dashboard: React.FC = () => {
   ];
   return (
     <>
-      <h4 className="mb-0">Dashboard</h4>
-      <Row className="p-2">
-        <Col lg={10} className="m-0 p-2">
-          <Row className="p-2">
+      <Row className="m-0 p-0">
+        <Col lg={10} className="p-1">
+          <Row className="p-0 m-0">
             {divisons.slice(0, 4).map((division, index) => {
               return (
-                <Col lg={6} md={6} sm={12} key={index} className="m-0 p-2">
+                <Col lg={6} md={6} sm={12} key={index} className="p-1">
                   <div className="graph__card2">
                     <h5>{`${division}`}</h5>
                   </div>
@@ -38,11 +37,11 @@ const Dashboard: React.FC = () => {
             })}
           </Row>
         </Col>
-        <Col lg={2} className="m-0 p-2">
-          <Row className="p-2">
+        <Col lg={2} className="p-1">
+          <Row className="p-0 m-0">
             {statistics.map((stat, index) => {
               return (
-                <Col lg={12} md={12} sm={12} key={index} className="m-0 p-2">
+                <Col lg={12} md={12} sm={12} key={index} className="p-1">
                   <div
                     className="graph__card"
                     style={{

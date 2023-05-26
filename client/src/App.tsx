@@ -18,7 +18,6 @@ const App: React.FC = () => {
           <div className="App__header p-0 mb-3">
             <Header />
           </div>
-
           {/* Navigation Bar */}
           <div
             className="App__body--sidebar"
@@ -30,7 +29,6 @@ const App: React.FC = () => {
               setShowNavTitles={setShowNavTitles}
             />
           </div>
-
           {/* Body content */}
           <div className="d-flex flex-row justify-content-between">
             <div
