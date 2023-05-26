@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -8,6 +8,7 @@ import { teamMembers } from "../../../models/member.model";
 import { Project } from "../../../models/project.model";
 import { tasks } from "../../../models/task.model";
 import TasksList from "../../tasks/components/tasksList";
+import NewTask from "../../forms/newTask/newTask";
 
 interface Props {
   project: Project;
@@ -15,8 +16,9 @@ interface Props {
 }
 
 const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
+  const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
   return (
-    <div className="project__card">
+    <div className="project__card mt-3">
       {/* Card Icon */}
       <section>
         <span className="project__card--icon">
@@ -32,8 +34,6 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             style={{ position: "relative" }}
           >
             <div className="w-75">{`${project.name}`}</div>
-
-            {/* <Link to={`/projects/${project.name}`}> */}
             <Button
               size="sm"
               variant="light"
@@ -124,10 +124,29 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
 
       {/* Associated Tasks */}
       <section>
-        <h5 className="mb-3">Associated Tasks&nbsp;(4)</h5>
-        <span className="mb-3">
-          <TasksList taskList={tasks.slice(1, 5)} />
-        </span>
+        <div className="d-flex flex-row justify-content-between mb-2">
+          <h5 className="mb-3">
+            {showNewTaskForm ? (
+              <span>Add New Task </span>
+            ) : (
+              <span>Associated Tasks </span>
+            )}
+          </h5>
+          <Button
+            variant="info"
+            onClick={() => setShowNewTaskForm(!showNewTaskForm)}
+          >
+            {showNewTaskForm ? <span>Close</span> : <span>New Task</span>}
+          </Button>
+        </div>
+
+        <div>
+          {showNewTaskForm ? (
+            <NewTask tasks={tasks} setClose={setShowNewTaskForm} />
+          ) : (
+            <TasksList taskList={tasks.slice(0, 5)} />
+          )}
+        </div>
       </section>
     </div>
   );

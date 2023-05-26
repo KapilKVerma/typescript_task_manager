@@ -121,9 +121,7 @@ const Tasks: React.FC = () => {
         >
           <Button
             variant="info"
-            onClick={() => {
-              setShowNewTaskForm(!showNewTaskForm);
-            }}
+            onClick={() => setShowNewTaskForm(!showNewTaskForm)}
           >
             {showNewTaskForm ? <span>Close</span> : <span>New Task</span>}
           </Button>

@@ -57,6 +57,7 @@ const ProjectCard: React.FC<Props> = (props) => {
           <Row>
             <Col lg={6}>
               <h6>Progress (65%)</h6>
+
               <ProgressBar>
                 <ProgressBar striped variant="success" now={65} key={1} />
               </ProgressBar>

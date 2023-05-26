@@ -1,5 +1,5 @@
 import React from "react";
-import ListGroup from "react-bootstrap/ListGroup";
+
 import { Task } from "../../../models/task.model";
 import TaskDetail from "./taskDetail";
 
@@ -10,21 +10,15 @@ interface Props {
 const TasksList: React.FC<Props> = ({ taskList }) => {
   return (
     <>
-      <ListGroup>
+      <div>
         {taskList.map((task) => {
           return (
-            <ListGroup.Item
-              key={task.id}
-              style={{
-                background: "rgba(255, 255, 255, 0.5)",
-                paddingBottom: "0",
-              }}
-            >
+            <div key={task.id} className="tasks__list__item">
               <TaskDetail task={task} />
-            </ListGroup.Item>
+            </div>
           );
         })}
-      </ListGroup>
+      </div>
     </>
   );
 };

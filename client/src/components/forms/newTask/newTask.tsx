@@ -4,8 +4,8 @@ import { Task } from "../../../models/task.model";
 import { projects } from "../../../models/project.model";
 
 interface Props {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  tasks?: Task[];
+  setTasks?: React.Dispatch<React.SetStateAction<Task[]>>;
   setClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -43,7 +43,7 @@ const NewTask: React.FC<Props> = ({ tasks, setTasks, setClose }) => {
   const submitNewTask = (e: React.FormEvent) => {
     e.preventDefault();
     setNewTaskState({ ...newTaskState, id: getRandomInt(10000, 20000) });
-    setTasks([...tasks, newTaskState]);
+    // setTasks([...tasks, newTaskState]);
   };
 
   return (

@@ -17,12 +17,10 @@ const Divisions: React.FC = () => {
 
   return (
     <>
-      <h4>Divisions</h4>
-      <hr className="mb-0" />
-      <Row className="p-2">
+      <Row className="m-0">
         {divisons.map((division, index) => {
           return (
-            <Col lg={4} md={6} sm={12} key={index} className="m-0 p-2">
+            <Col lg={4} md={6} sm={12} key={index} className="p-2">
               <div className="division__card">
                 <span className="division__card--icon">
                   <AiOutlineBuild size={"2rem"} />

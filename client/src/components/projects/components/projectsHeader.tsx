@@ -16,22 +16,14 @@ const ProjectsHeader: React.FC<Props> = (props) => {
     <>
       <div className="d-flex flex-row justify-content-between">
         {/* Title and Search  */}
-        <section className="w-50 d-flex flex-row justify-content-start">
-          <h4>
-            {projectDetail ? (
-              <span>Project Detail</span>
-            ) : (
-              <span>Projects</span>
-            )}
-          </h4>
-          <div className="m-3"></div>
+        <section className="w-50">
           {!projectDetail && (
             <div>
               <form className="search__bar">
                 <input
                   type="text"
                   name="title"
-                  placeholder="Enter name..."
+                  placeholder="Enter project name..."
                   className="search__bar---input"
                 />
                 <Button

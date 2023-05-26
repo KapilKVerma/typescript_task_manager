@@ -9,43 +9,21 @@ import { AiOutlineProject } from "react-icons/ai";
 const Workboard: React.FC = () => {
   return (
     <>
-      <h4 className="mb-0">Workboard</h4>
-      <Row className="p-2">
-        <Col lg={9} className="m-0 p-3">
+      <Row className="m-0">
+        <Col lg={9} className="p-1">
           <Row className="mb-4">
             <Col lg={4} md={4} sm={4}>
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "1rem",
-                  background: "rgb(81,151,248,.25)",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="workboard__tasks__header">
                 <h5>Remaining (4)</h5>
               </div>
             </Col>
             <Col lg={4} md={4} sm={4}>
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "1rem",
-                  background: "rgb(81,151,248,.25)",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="workboard__tasks__header">
                 <h5>In Progress (2)</h5>
               </div>
             </Col>
             <Col lg={4} md={4} sm={4}>
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "1rem",
-                  background: "rgb(81,151,248,.25)",
-                  borderRadius: "25px",
-                }}
-              >
+              <div className="workboard__tasks__header">
                 <h5>Completed (2)</h5>
               </div>
             </Col>
@@ -53,20 +31,13 @@ const Workboard: React.FC = () => {
 
           <Row>
             <Col lg={4} md={4} sm={4}>
-              <div
-                style={{
-                  padding: ".5rem",
-                  background: "rgba(0,0,0, 0.1)",
-                  borderRadius: "10px",
-                  height: "80vh",
-                }}
-              >
+              <div className="workboard__tasks__list--container">
                 {tasks.slice(3, 7).map((task, index) => {
                   return (
                     <div
                       className="task__card mb-2 pb-1"
                       key={index}
-                      style={{ borderLeft: "5px solid rgb(251,129,55)" }}
+                      style={{ borderLeft: "5px solid rgb(80,150,247)" }}
                     >
                       <h6>{task.title}</h6>
                       <p>{task.description}</p>
@@ -80,14 +51,7 @@ const Workboard: React.FC = () => {
               </div>
             </Col>
             <Col lg={4} md={4} sm={4}>
-              <div
-                style={{
-                  padding: ".5rem",
-                  background: "rgba(0,0,0, 0.1)",
-                  borderRadius: "10px",
-                  height: "80vh",
-                }}
-              >
+              <div className="workboard__tasks__list--container">
                 {tasks.slice(7, 9).map((task, index) => {
                   return (
                     <div
@@ -107,14 +71,7 @@ const Workboard: React.FC = () => {
               </div>
             </Col>
             <Col lg={4} md={4} sm={4}>
-              <div
-                style={{
-                  padding: ".5rem",
-                  background: "rgba(0,0,0, 0.1)",
-                  borderRadius: "10px",
-                  height: "80vh",
-                }}
-              >
+              <div className="workboard__tasks__list--container">
                 {tasks.slice(1, 3).map((task, index) => {
                   return (
                     <div
@@ -135,11 +92,17 @@ const Workboard: React.FC = () => {
             </Col>
           </Row>
         </Col>
-        <Col lg={3} className="m-0">
-          <Row className="p-2">
+        <Col lg={3} className="p-1 pl-3">
+          <div
+            className="workboard__tasks__header"
+            style={{ backgroundColor: "rgb(23,195,165)", color: "#fff" }}
+          >
+            <h5>Assigned Project(s)</h5>
+          </div>
+          <div>
             {projects.slice(0, 2).map((project, index) => {
               return (
-                <Col key={index} className="m-0 p-2">
+                <div key={index} className="mt-5">
                   <div className="project__card">
                     <span className="project__card--icon">
                       <AiOutlineProject size={"2rem"} />
@@ -167,10 +130,10 @@ const Workboard: React.FC = () => {
                       </Row>
                     </div>
                   </div>
-                </Col>
+                </div>
               );
             })}
-          </Row>
+          </div>
         </Col>
       </Row>
     </>
