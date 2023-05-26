@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AiOutlineBuild } from "react-icons/ai";
@@ -15,6 +15,10 @@ const Divisions: React.FC = () => {
     "Operations",
   ];
 
+  const [factor, setFactor] = useState<number>(50);
+  const [show, setShow] = useState<number>(0);
+
+  const circleContainer = useRef();
   return (
     <>
       <Row className="m-0">
@@ -32,6 +36,42 @@ const Divisions: React.FC = () => {
           );
         })}
       </Row>
+
+      <div
+        className="p-5 d-flex flex-row justify-content-start"
+        style={{ position: "relative" }}
+      >
+        {["", "", ""].map((_, index) => {
+          let number = index * factor;
+          return (
+            <div
+              className="circle"
+              style={{ left: number, opacity: show }}
+            ></div>
+          );
+        })}
+      </div>
+      <div className="mt-5">
+        <button
+          onClick={() => {
+            setFactor(90);
+            setShow(1);
+          }}
+        >
+          Expand
+        </button>
+      </div>
+
+      <div className="mt-2">
+        <button
+          onClick={() => {
+            setFactor(50);
+            setShow(0);
+          }}
+        >
+          Squeez
+        </button>
+      </div>
     </>
   );
 };

@@ -20,7 +20,7 @@ const App: React.FC = () => {
           </div>
           {/* Navigation Bar */}
           <div
-            className="App__body--sidebar"
+            className="App__body__sidebar"
             style={{ width: `${showNavTitles ? "12.1%" : "3%"}` }}
           >
             <NavBar
@@ -32,6 +32,7 @@ const App: React.FC = () => {
           {/* Body content */}
           <div className="d-flex flex-row justify-content-between">
             <div
+              className="App__body__sidebar--container"
               style={{
                 width: `${showNavTitles ? "12.5%" : "3%"}`,
               }}

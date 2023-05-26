@@ -38,13 +38,24 @@
   min-height: 65rem;
 }
 
-.App__body--sidebar {
+.App__body__sidebar--container {
+  transition: all 0.4s;
+}
+
+.sidebar__link__title {
+  display: inline;
+  transition: all 0.4s;
+}
+
+.App__body__sidebar {
   position: fixed;
   z-index: 1;
+  transition: all 0.4s;
 }
 
 .App__body--content {
   padding: 0 1rem;
+  transition: all 0.4s;
 }
 
 .object__form {
@@ -294,6 +305,17 @@
   background: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   height: 80vh;
+}
+
+.circle {
+  height: 5rem;
+  width: 5rem;
+  background: white;
+  margin: 0.25rem;
+  border-radius: 50px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  transition: all 0.5s;
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

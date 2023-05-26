@@ -29,7 +29,14 @@ const NavBar: React.FC<Props> = (props) => {
               key={index}
             >
               {link.icon}
-              {showNavTitles ? <>&nbsp;&nbsp;{link.title}</> : null}
+              <div
+                className="sidebar__link__title"
+                style={{
+                  fontSize: `${showNavTitles ? "1rem" : "0"}`,
+                }}
+              >
+                &nbsp;&nbsp;{link.title}
+              </div>
             </Button>
           </Link>
         );
