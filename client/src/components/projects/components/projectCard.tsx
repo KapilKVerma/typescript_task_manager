@@ -7,7 +7,6 @@ import { Project } from "../../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { teamMembers } from "../../../models/member.model";
-import { Link } from "react-router-dom";
 
 interface Props {
   project: Project;

@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { tasks, Task } from "../../models/task.model";
-import TasksList from "./tasksList";
-import TasksTable from "./tasksTable";
+import { Task } from "../../models/task.model";
+import { tasks } from "../../models/task.model";
+import TasksList from "./components/tasksList";
+import TasksTable from "./components/tasksTable";
 import NewTask from "../forms/newTask/newTask";
 
 enum taskCategory {

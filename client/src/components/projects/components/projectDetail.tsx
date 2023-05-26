@@ -7,7 +7,7 @@ import { AiOutlineProject, AiOutlineClose } from "react-icons/ai";
 import { teamMembers } from "../../../models/member.model";
 import { Project } from "../../../models/project.model";
 import { tasks } from "../../../models/task.model";
-import TasksList from "../../tasks/tasksList";
+import TasksList from "../../tasks/components/tasksList";
 
 interface Props {
   project: Project;

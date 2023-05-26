@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { BiTrash, BiEdit, BiCheck, BiDetail } from "react-icons/bi";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import { Task } from "../../models/task.model";
+import { Task } from "../../../models/task.model";
 
 interface Props {
   task: Task;

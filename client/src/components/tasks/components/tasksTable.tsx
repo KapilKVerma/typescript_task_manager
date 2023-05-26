@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import { Task } from "../../models/task.model";
+import { Task } from "../../../models/task.model";
 
 interface Props {
   tasks: Task[];

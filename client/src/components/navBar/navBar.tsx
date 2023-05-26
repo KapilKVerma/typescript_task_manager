@@ -21,6 +21,7 @@ const NavBar: React.FC<Props> = (props) => {
             <Button
               variant="light"
               className="w-100 text-left mb-2 p-3 font-weight-bold"
+              style={{ minWidth: "3.5rem" }}
               key={index}
               // onClick={() => navigate(link.path)}
             >
