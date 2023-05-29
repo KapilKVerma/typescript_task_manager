@@ -1,7 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AiOutlineBuild } from "react-icons/ai";
+import DivisionCard from "../wrapperComponents/divisionCard";
 
 const Divisions: React.FC = () => {
   const divisons = [
@@ -18,20 +19,15 @@ const Divisions: React.FC = () => {
   const [factor, setFactor] = useState<number>(50);
   const [show, setShow] = useState<number>(0);
 
-  const circleContainer = useRef();
   return (
     <>
       <Row className="m-0">
         {divisons.map((division, index) => {
           return (
             <Col lg={4} md={6} sm={12} key={index} className="p-2">
-              <div className="division__card">
-                <span className="division__card--icon">
-                  <AiOutlineBuild size={"2rem"} />
-                </span>
-
+              <DivisionCard>
                 <h5>{`${division}`}</h5>
-              </div>
+              </DivisionCard>
             </Col>
           );
         })}
@@ -55,7 +51,6 @@ const Divisions: React.FC = () => {
         <button
           onClick={() => {
             setFactor(90);
-            setShow(1);
           }}
         >
           Expand
@@ -66,7 +61,6 @@ const Divisions: React.FC = () => {
         <button
           onClick={() => {
             setFactor(50);
-            setShow(0);
           }}
         >
           Squeez

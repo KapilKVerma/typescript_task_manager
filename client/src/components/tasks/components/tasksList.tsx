@@ -10,7 +10,7 @@ interface Props {
 const TasksList: React.FC<Props> = ({ taskList }) => {
   return (
     <>
-      <div>
+      <div className="p-2">
         {taskList.map((task) => {
           return (
             <div key={task.id} className="tasks__list__item">

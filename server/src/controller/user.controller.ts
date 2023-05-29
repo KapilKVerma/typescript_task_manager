@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
+import UserModel, { User } from "../model/user.model";
 
 export async function createUserHandler(
   req: Request<{}, {}, CreateUserInput>,
@@ -9,7 +10,7 @@ export async function createUserHandler(
   const body = req.body;
 
   try {
-    const user = await createUser(body);
+    const user = await UserModel.create(body);
 
     // await sendEmail({
     //   to: user.email,

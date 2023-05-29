@@ -23,10 +23,10 @@ const Projects: React.FC = () => {
       {/* Projects Grid */}
       <section>
         {!projectDetail && (
-          <Row className="p-2">
+          <Row className="m-0 p-0 mt-3">
             {projects.map((project, index) => {
               return (
-                <Col lg={4} md={6} sm={12} key={index} className="m-0 p-2">
+                <Col lg={4} md={6} sm={12} key={index} className="m-0 p-1">
                   <ProjectCard
                     project={project}
                     setProjectDetail={setProjectDetail}

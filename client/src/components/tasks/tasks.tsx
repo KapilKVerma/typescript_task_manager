@@ -68,8 +68,13 @@ const Tasks: React.FC = () => {
   };
 
   const hanldeClick = (tasks: Task[], category: number) => {
+    // Call a function to filter tasks based on the category
     filterTasks(tasks, category);
+
+    // Set the active button based on the selected category
     setActiveButton(category);
+
+    // Hide the new task form
     setShowNewTaskForm(false);
   };
 
@@ -138,7 +143,7 @@ const Tasks: React.FC = () => {
       </div>
 
       {/* Tasks List */}
-      <div className="mb-3">
+      <div>
         {activeButton !== taskCategory.showAll ? (
           <TasksList taskList={taskList} />
         ) : (
