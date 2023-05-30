@@ -1,5 +1,13 @@
-import UserModel, { User } from "../model/user.model";
+import { FilterQuery } from "mongoose";
+import { omit } from "lodash";
+import UserModel, { UserDocument, UserInput } from "../model/user.model";
 
-export function createUser(input: Partial<User>) {
-  return UserModel.create(input);
+export async function createUser(input: UserInput) {
+  try {
+    const user = await UserModel.create(input);
+
+    return omit(user.toJSON(), "password", "passwordConfirmation");
+  } catch (e: any) {
+    throw new Error(e);
+  }
 }
