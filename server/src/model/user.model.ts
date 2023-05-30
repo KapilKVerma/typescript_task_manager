@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
 
@@ -7,6 +7,7 @@ export interface UserInput {
   profileImg?: string;
   firstName: string;
   lastName: string;
+  jobTitle: string;
   password: string;
   passwordConfirmation: string;
   roles: string[];
@@ -16,6 +17,7 @@ export interface UserInput {
     postCode: string;
     state: string;
   };
+  company: string;
 }
 
 export interface UserDocument extends UserInput, mongoose.Document {
@@ -30,6 +32,7 @@ const userSchema = new mongoose.Schema(
     profileImg: { type: String, required: false },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    jobTitle: { type: String, required: true },
     password: { type: String, required: true },
     roles: { type: Array, required: true },
     address: {
@@ -38,6 +41,7 @@ const userSchema = new mongoose.Schema(
       postCode: { type: String },
       state: { type: String },
     },
+    company: { type: String, required: true },
   },
   {
     timestamps: true,

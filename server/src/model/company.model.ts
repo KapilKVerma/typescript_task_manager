@@ -12,7 +12,6 @@ export interface CompanyInput {
     unitNumber?: string;
     streetAddress: string;
     postCode: string;
-    state: string;
   };
 }
 
@@ -32,7 +31,6 @@ const companySchema = new mongoose.Schema(
       unitNumber: { type: String },
       streetAddress: { type: String },
       postCode: { type: String },
-      state: { type: String },
     },
   },
   {
@@ -41,17 +39,17 @@ const companySchema = new mongoose.Schema(
 );
 
 companySchema.pre("save", async function (next) {
-  let user = this as CompanyDocument;
+  let company = this as CompanyDocument;
 
-  if (!user.isModified("password")) {
+  if (!company.isModified("password")) {
     return next();
   }
 
   const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
 
-  const hash = await bcrypt.hashSync(user.password, salt);
+  const hash = await bcrypt.hashSync(company.password, salt);
 
-  user.password = hash;
+  company.password = hash;
 
   return next();
 });
@@ -59,9 +57,11 @@ companySchema.pre("save", async function (next) {
 companySchema.methods.comparePassword = async function (
   candidatePassword: string
 ): Promise<boolean> {
-  const user = this as CompanyDocument;
+  const company = this as CompanyDocument;
 
-  return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
+  return bcrypt
+    .compare(candidatePassword, company.password)
+    .catch((e) => false);
 };
 
 const Company = mongoose.model<CompanyDocument>("Company", companySchema);

@@ -9,7 +9,7 @@ export interface Task {
   userId: string;
 }
 
-export interface UserDocument extends Task, mongoose.Document {
+export interface TaskDocument extends Task, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }

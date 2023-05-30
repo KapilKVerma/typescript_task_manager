@@ -1,4 +1,4 @@
-import { array, object, string, TypeOf } from "zod";
+import { object, string, TypeOf } from "zod";
 import { z } from "zod";
 
 // Password Rules
@@ -14,30 +14,17 @@ const passwordRegex =
 const passwordRules =
   "Password must contain at least one lowercase letter, one uppercase letter, and one digit";
 
-// Define enumeration for valid state values
-const StateEnum = z.enum(["ACT", "NSW", "NT", "Qld", "SA", "Vic", "Tas", "WA"]);
-
-// Define company value
-const objectId = "/^[a-fA-F0-9]{24}$/";
-
 // Define schema for the address subfield
-const addressSchema = object({
+const appSettingsSchema = object({
   unitNumber: string().optional(),
   streetAddress: string(),
   postCode: string(),
-  state: StateEnum,
 }).optional();
 
-// Define enumeration for valid role values
-const roles = z.enum(["manager", "employee", "Manager", "Employee"]);
-
-export const createUserSchema = object({
+export const createCompanySchema = object({
   body: object({
     email: string().nonempty("Email is required").email("Not a valid email"),
-    profileImg: string().optional(),
-    firstName: string().nonempty("First Name is required"),
-    lastName: string().nonempty("Last Name is required"),
-    jobTitle: string().nonempty("Job Title is required"),
+    name: string().nonempty("Last Name is required"),
     password: string()
       .nonempty("Password is required")
       .min(minLength, "Password must be at least 8 characters long")
@@ -47,15 +34,12 @@ export const createUserSchema = object({
     passwordConfirmation: string().nonempty(
       "Password confirmation is required"
     ),
-    roles: array(roles).nonempty("User role not defined"),
-    address: addressSchema,
-    company: string().refine((value) => /^[a-fA-F0-9]{24}$/.test(value), {
-      message: "Invalid ObjectId",
-    }),
+    roles: string().nonempty("Role not defined"),
+    appSettings: appSettingsSchema,
   }).refine((data) => data.password === data.passwordConfirmation, {
     message: "Passwords do not match",
     path: ["passwordConfirmation"],
   }),
 });
 
-export type CreateUserInput = TypeOf<typeof createUserSchema>["body"];
+export type CreateCompanyInput = TypeOf<typeof createCompanySchema>["body"];
