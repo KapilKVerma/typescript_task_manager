@@ -3,6 +3,7 @@ import validateResource from "../middleware/validateResource";
 import { createSessionSchema } from "../schema/session.schema";
 import {
   createSessionHandler,
+  deleteSessionHandler,
   getUserSessionsHandler,
 } from "../controller/session.controller";
 
@@ -17,5 +18,7 @@ router.post(
 );
 
 router.get("/api/sessions", requireUser, getUserSessionsHandler);
+
+router.delete("/api/sessions", requireUser, deleteSessionHandler);
 
 export default router;
