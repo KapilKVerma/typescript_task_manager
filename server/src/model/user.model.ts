@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
 
@@ -8,6 +8,7 @@ export interface UserInput {
   firstName: string;
   lastName: string;
   jobTitle: string;
+  skills: string[];
   password: string;
   passwordConfirmation: string;
   roles: string[];
@@ -33,6 +34,7 @@ const userSchema = new mongoose.Schema(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     jobTitle: { type: String, required: true },
+    skills: { type: Array, required: true },
     password: { type: String, required: true },
     roles: { type: Array, required: true },
     address: {

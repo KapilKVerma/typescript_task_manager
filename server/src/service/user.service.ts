@@ -13,9 +13,9 @@ export async function createUser(input: UserInput) {
 
 export async function getUser(input: string) {
   try {
-    const user = await UserModel.findById(input).select("-password");
+    const user = await UserModel.findById(input).select("-password").lean();
     if (user) return user;
-    return { message: "Not found" };
+    return { message: "User not found" };
   } catch (e: any) {
     throw new Error(e);
   }
@@ -23,7 +23,9 @@ export async function getUser(input: string) {
 
 export async function getUsers(input: string) {
   try {
-    const users = await UserModel.find({ company: input }).select("-password");
+    const users = await UserModel.find({ company: input })
+      .select("-password")
+      .lean();
     return users;
   } catch (e: any) {
     throw new Error(e);

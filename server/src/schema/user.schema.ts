@@ -17,9 +17,6 @@ const passwordRules =
 // Define enumeration for valid state values
 const StateEnum = z.enum(["ACT", "NSW", "NT", "Qld", "SA", "Vic", "Tas", "WA"]);
 
-// Define company value
-const objectId = "/^[a-fA-F0-9]{24}$/";
-
 // Define schema for the address subfield
 const addressSchema = object({
   unitNumber: string().optional(),
@@ -38,6 +35,7 @@ export const createUserSchema = object({
     firstName: string().nonempty("First Name is required"),
     lastName: string().nonempty("Last Name is required"),
     jobTitle: string().nonempty("Job Title is required"),
+    skills: array(string()),
     password: string()
       .nonempty("Password is required")
       .min(minLength, "Password must be at least 8 characters long")
