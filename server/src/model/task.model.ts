@@ -27,7 +27,7 @@ const taskSchema = new mongoose.Schema(
           const startDate = (this as Task).startDate as Date;
           return value > startDate;
         },
-        message: "endDate must be greater than startDate",
+        message: "End date must be after start date",
       },
     },
     projectId: { type: String, required: true },
@@ -38,6 +38,6 @@ const taskSchema = new mongoose.Schema(
   }
 );
 
-const TaskModel = mongoose.model<Task>("Task", taskSchema);
+const TaskModel = mongoose.model<TaskDocument>("Task", taskSchema);
 
 export default TaskModel;

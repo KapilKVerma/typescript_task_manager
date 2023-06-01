@@ -64,6 +64,6 @@ companySchema.methods.comparePassword = async function (
     .catch((e) => false);
 };
 
-const Company = mongoose.model<CompanyDocument>("Company", companySchema);
+const CompanyModel = mongoose.model<CompanyDocument>("Company", companySchema);
 
-export default Company;
+export default CompanyModel;
