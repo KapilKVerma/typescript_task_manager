@@ -5,10 +5,6 @@ import { createTaskHandler } from "../controller/task.controller";
 
 const router = express.Router();
 
-router.post(
-  "/api/tasks",
-  validateResource(createTaskSchema),
-  createTaskHandler
-);
+router.post("/tasks", validateResource(createTaskSchema), createTaskHandler);
 
 export default router;

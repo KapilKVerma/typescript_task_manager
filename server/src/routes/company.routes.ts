@@ -6,7 +6,7 @@ import { createCompanyHandler } from "../controller/company.controller";
 const router = express.Router();
 
 router.post(
-  "/api/companies",
+  "/companies",
   validateResource(createCompanySchema),
   createCompanyHandler
 );

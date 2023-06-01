@@ -12,13 +12,13 @@ import requireUser from "../middleware/requireUser";
 const router = express.Router();
 
 router.post(
-  "/api/sessions",
+  "/sessions",
   validateResource(createSessionSchema),
   createSessionHandler
 );
 
-router.get("/api/sessions", requireUser, getUserSessionsHandler);
+router.get("/sessions", requireUser, getUserSessionsHandler);
 
-router.delete("/api/sessions", requireUser, deleteSessionHandler);
+router.delete("/sessions", requireUser, deleteSessionHandler);
 
 export default router;

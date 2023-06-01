@@ -14,7 +14,7 @@ router.post(
   validateResource(createUserSchema),
   createUserHandler
 );
-router.get("/api/users/:id", getUserHandler);
-router.get("/api/users/company/:compId", getUsersHandler);
+router.get("/users/:id", getUserHandler);
+router.get("/users/company/:compId", getUsersHandler);
 
 export default router;
