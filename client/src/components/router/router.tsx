@@ -1,9 +1,5 @@
-import React, { lazy, Suspense, useState} from "react";
+import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import NavBar from "../navBar/navBar";
-import Header from "../header/header";
-import { navLinks } from "../../models/nav.link"
-
 
 const Dashboard = lazy(() => import("../dashboard/dashboard"));
 const Projects = lazy(() => import("../projects/projects"));
@@ -14,8 +10,6 @@ const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
 const Admin = lazy(() => import("../admin/admin"));
 
 const Router: React.FC = () => {
-const [showNavTitles, setShowNavTitles] = useState<Boolean>(true);
-
   const AppRoutes = [
     { path: "/dashboard", component: Dashboard },
     { path: "/projects", component: Projects },
@@ -26,27 +20,19 @@ const [showNavTitles, setShowNavTitles] = useState<Boolean>(true);
     { path: "/admin", component: Admin },
   ];
 
-
   return (
     <>
-    
-        
-         
-        
-                <Routes>
-                  {AppRoutes.map((route, index) => {
-                    return (
-                      <Route
-                        path={route.path}
-                        element={<route.component />}
-                        key={index}
-                      />
-                    );
-                  })}
-                </Routes>
-            
-   
-      
+      <Routes>
+        {AppRoutes.map((route, index) => {
+          return (
+            <Route
+              path={route.path}
+              element={<route.component />}
+              key={index}
+            />
+          );
+        })}
+      </Routes>
     </>
   );
 };
