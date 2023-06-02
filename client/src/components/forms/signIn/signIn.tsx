@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 const SignIn: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Container
@@ -22,7 +24,11 @@ const SignIn: React.FC = () => {
             <Form.Control type="password" placeholder="Password" />
           </Form.Group>
 
-          <Button variant="info" className="form__button">
+          <Button
+            variant="info"
+            className="form__button"
+            onClick={() => navigate("/dashboard")}
+          >
             Submit
           </Button>
         </Form>
