@@ -2,11 +2,25 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { MdNotificationsNone, MdOutlineLogout } from "react-icons/md";
+import { SiOpenproject } from "react-icons/si";
 
 const Header: React.FC = () => {
   return (
     <>
-      <h4 className="p-3 pl-4">Task Manager</h4>
+      <div
+        style={{
+          fontFamily: "serif",
+          color: "rgba(255,255,255)",
+          fontSize: "2rem",
+          backgroundColor: "rgb(23,162,184)",
+          padding: " .65rem 1.5rem",
+          borderRadius: "20px",
+        }}
+      >
+        <SiOpenproject />
+        <span>&nbsp;sthana</span>
+      </div>
+
       <div className="d-flex flex-row justify-content-between">
         <ButtonGroup className="m-3">
           <Button

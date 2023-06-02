@@ -1,16 +1,16 @@
 import { ReactElement } from "react";
-import { BsFillGearFill, BsPersonWorkspace } from "react-icons/bs";
+import { BsPersonWorkspace } from "react-icons/bs";
 import {
   AiOutlineProject,
   AiOutlineTeam,
   AiOutlineBuild,
 } from "react-icons/ai";
 import { GrUserAdmin } from "react-icons/gr";
-import { SlCalender } from "react-icons/sl";
 import {
   MdOutlineDashboard,
   MdOutlineLogout,
   MdOutlineTask,
+  MdOutlineViewTimeline,
 } from "react-icons/md";
 import { To } from "react-router-dom";
 
@@ -51,7 +51,11 @@ export const navLinks: navLink[] = [
     icon: <AiOutlineTeam size={"1.25rem"} />,
     path: "/teamMembers",
   },
-  { title: "Calender", icon: <SlCalender size={"1.25rem"} />, path: "/" },
+  {
+    title: "Timeline",
+    icon: <MdOutlineViewTimeline size={"1.25rem"} />,
+    path: "/",
+  },
   {
     title: "Admin",
     icon: <GrUserAdmin size={"1.25rem"} />,

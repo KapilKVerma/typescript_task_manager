@@ -4,16 +4,28 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
-const SignIn: React.FC = () => {
+interface Props {
+  setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SignIn: React.FC<Props> = ({ setShowSignIn }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Container
-        style={{ border: "1px solid rgb(23,162,184)", borderRadius: "10px" }}
-        className="p-5"
-      >
-        <h1>Sign In</h1>
-        <Form className="w-100 p-1">
+      <Container className="pl-5 pr-5">
+        <h1>Sign in to your account</h1>
+        <h5>
+          Don't have an account?
+          <span
+            style={{ color: "blue", cursor: "pointer" }}
+            onClick={() => {
+              setShowSignIn(false);
+            }}
+          >
+            &nbsp;&nbsp;Sign Up
+          </span>
+        </h5>
+        <Form className="w-100 p-1 mt-4">
           <Form.Group controlId="formBasicEmail" className="mb-3">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" />

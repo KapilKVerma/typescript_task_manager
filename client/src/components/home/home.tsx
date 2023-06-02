@@ -8,7 +8,7 @@ import Forms from "./components/forms";
 const Home: React.FC = () => {
   return (
     <React.Fragment>
-      <Row style={{ height: "100vh" }} className="m-0 p-0">
+      <Row className="Home">
         <Col lg={8} className="p-0">
           <Title />
         </Col>
