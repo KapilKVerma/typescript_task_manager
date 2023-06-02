@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 const Dashboard = lazy(() => import("../dashboard/dashboard"));
 const Projects = lazy(() => import("../projects/projects"));
 const Tasks = lazy(() => import("../tasks/tasks"));
-const WorkBoard = lazy(() => import("../workboard/workboard"));
+const WorkBoard = lazy(() => import("../workboard/workBoard"));
 const Divisions = lazy(() => import("../divisions/divisions"));
 const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
 const Admin = lazy(() => import("../admin/admin"));
