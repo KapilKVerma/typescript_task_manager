@@ -1,5 +1,9 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState} from "react";
 import { Routes, Route } from "react-router-dom";
+import NavBar from "../navBar/navBar";
+import Header from "../header/header";
+import { navLinks } from "../../models/nav.link"
+
 
 const Dashboard = lazy(() => import("../dashboard/dashboard"));
 const Projects = lazy(() => import("../projects/projects"));
@@ -10,8 +14,9 @@ const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
 const Admin = lazy(() => import("../admin/admin"));
 
 const Router: React.FC = () => {
+const [showNavTitles, setShowNavTitles] = useState<Boolean>(true);
+
   const AppRoutes = [
-    { path: "/", component: Dashboard },
     { path: "/dashboard", component: Dashboard },
     { path: "/projects", component: Projects },
     { path: "/tasks", component: Tasks },
@@ -21,23 +26,27 @@ const Router: React.FC = () => {
     { path: "/admin", component: Admin },
   ];
 
-  const Loading: React.FC = () => <p>Loading ...</p>;
 
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            return (
-              <Route
-                path={route.path}
-                element={<route.component />}
-                key={index}
-              />
-            );
-          })}
-        </Routes>
-      </Suspense>
+    
+        
+         
+        
+                <Routes>
+                  {AppRoutes.map((route, index) => {
+                    return (
+                      <Route
+                        path={route.path}
+                        element={<route.component />}
+                        key={index}
+                      />
+                    );
+                  })}
+                </Routes>
+            
+   
+      
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import AppWrapper from "../wrapperComponents/appWrapper";
 import { teamMembers } from "../../models/member.model";
 import TeamMembersHeader from "./components/teamMembersHeader";
 import MemberListCard from "../wrapperComponents/teamMember/memberListCard";
@@ -11,6 +12,7 @@ const TeamMembers: React.FC = () => {
 
   return (
     <>
+    <AppWrapper>
       {/* Team Members Header */}
       <section>
         <TeamMembersHeader setListView={setListView} />
@@ -90,6 +92,7 @@ const TeamMembers: React.FC = () => {
           </Row>
         ) : null}
       </section>
+      </AppWrapper>
     </>
   );
 };

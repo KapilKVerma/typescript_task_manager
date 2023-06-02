@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Button from "react-bootstrap/Button";
+import AppWrapper from "../wrapperComponents/appWrapper";
 import { Task } from "../../models/task.model";
 import { tasks } from "../../models/task.model";
 import TasksList from "./components/tasksList";
@@ -80,6 +81,7 @@ const Tasks: React.FC = () => {
 
   return (
     <>
+    <AppWrapper>
       {/* Tasks  Header*/}
       <div className="d-flex flex-row justify-content-between mb-3">
         <div className="w-50 d-flex flex-row justify-content-start">
@@ -150,6 +152,7 @@ const Tasks: React.FC = () => {
           <TasksTable tasks={taskList} />
         )}
       </div>
+      </AppWrapper>
     </>
   );
 };

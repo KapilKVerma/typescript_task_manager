@@ -2,6 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import AppWrapper from "../wrapperComponents/appWrapper";
 import { tasks } from "../../models/task.model";
 import { projects } from "../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
@@ -9,6 +10,7 @@ import { AiOutlineProject } from "react-icons/ai";
 const Workboard: React.FC = () => {
   return (
     <>
+    <AppWrapper>
       <Row className="m-0">
         <Col lg={9} className="p-1">
           <Row className="mb-4">
@@ -136,6 +138,7 @@ const Workboard: React.FC = () => {
           </div>
         </Col>
       </Row>
+    </AppWrapper>
     </>
   );
 };

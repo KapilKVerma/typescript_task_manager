@@ -1,4 +1,5 @@
 import React from "react";
+import AppWrapper from "../wrapperComponents/appWrapper";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
@@ -23,6 +24,7 @@ const Dashboard: React.FC = () => {
   ];
   return (
     <>
+    <AppWrapper>
       <Row className="m-0 p-0">
         <Col lg={10} className="p-1">
           <Row className="p-0 m-0">
@@ -69,6 +71,7 @@ const Dashboard: React.FC = () => {
           </Row>
         </Col>
       </Row>
+      </AppWrapper>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import AppWrapper from "../wrapperComponents/appWrapper";
 import { Project, projects } from "../../models/project.model";
 import ProjectsHeader from "./components/projectsHeader";
 import ProjectCard from "./components/projectCard";
@@ -11,6 +12,7 @@ const Projects: React.FC = () => {
   const [showNewProjectForm, setShowNewProjectForm] = useState<boolean>(false);
   return (
     <>
+    <AppWrapper>
       {/* Projects Header */}
       <section>
         <ProjectsHeader
@@ -48,6 +50,7 @@ const Projects: React.FC = () => {
           />
         )}
       </section>
+      </AppWrapper>
     </>
   );
 };

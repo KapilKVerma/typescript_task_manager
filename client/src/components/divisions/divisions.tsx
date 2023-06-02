@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import AppWrapper from "../wrapperComponents/appWrapper";
 import { AiOutlineBuild } from "react-icons/ai";
 import DivisionCard from "../wrapperComponents/divisionCard";
 
@@ -21,6 +22,7 @@ const Divisions: React.FC = () => {
 
   return (
     <>
+    <AppWrapper>
       <Row className="m-0">
         {divisons.map((division, index) => {
           return (
@@ -66,6 +68,7 @@ const Divisions: React.FC = () => {
           Squeez
         </button>
       </div>
+      </AppWrapper>
     </>
   );
 };
