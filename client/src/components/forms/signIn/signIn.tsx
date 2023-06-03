@@ -5,21 +5,21 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 
 interface Props {
-  setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setButtonActive: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SignIn: React.FC<Props> = ({ setShowSignIn }) => {
+const SignIn: React.FC<Props> = ({ setButtonActive }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Container className="pl-5 pr-5">
+      <Container>
         <h1>Sign in to your account</h1>
         <h5>
           Don't have an account?
           <span
             style={{ color: "blue", cursor: "pointer" }}
             onClick={() => {
-              setShowSignIn(false);
+              setButtonActive(3);
             }}
           >
             &nbsp;&nbsp;Sign Up

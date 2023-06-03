@@ -3,20 +3,20 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 interface Props {
-  setShowSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setButtonActive: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SignUp: React.FC<Props> = ({ setShowSignIn }) => {
+const SignUp: React.FC<Props> = ({ setButtonActive }) => {
   return (
     <>
-      <Container className="pl-5 pr-5">
+      <Container>
         <h1>Create your account</h1>{" "}
         <h5>
           Have an account?
           <span
             style={{ color: "blue", cursor: "pointer" }}
             onClick={() => {
-              setShowSignIn(true);
+              setButtonActive(2);
             }}
           >
             &nbsp;&nbsp;Sign in now
