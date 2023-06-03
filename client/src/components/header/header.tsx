@@ -7,16 +7,7 @@ import { SiOpenproject } from "react-icons/si";
 const Header: React.FC = () => {
   return (
     <>
-      <div
-        style={{
-          fontFamily: "serif",
-          color: "rgba(255,255,255)",
-          fontSize: "2rem",
-          backgroundColor: "rgb(23,162,184)",
-          padding: " .65rem 1.5rem",
-          borderRadius: "20px",
-        }}
-      >
+      <div className="App__logo">
         <SiOpenproject />
         <span>&nbsp;sthana</span>
       </div>
@@ -25,17 +16,17 @@ const Header: React.FC = () => {
         <ButtonGroup className="m-3">
           <Button
             variant="light"
-            className="font-weight-bold"
-            style={{ borderRadius: "50px", padding: "0 1rem" }}
+            className="font-weight-bold category__button"
+            style={{ borderRadius: "50px" }}
           >
             <MdNotificationsNone size={"1.25rem"} />
             &nbsp;(2)
           </Button>
           <div className="m-1"></div>
           <Button
-            variant="light text-center"
-            className="font-weight-bold"
-            style={{ borderRadius: "50px", padding: "0 1rem" }}
+            variant="light"
+            className="font-weight-bold category__button"
+            style={{ borderRadius: "50px" }}
           >
             <MdOutlineLogout size={"1.25rem"} />
             &nbsp;&nbsp;Logout

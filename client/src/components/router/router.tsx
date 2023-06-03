@@ -7,6 +7,7 @@ const Tasks = lazy(() => import("../tasks/tasks"));
 const WorkBoard = lazy(() => import("../workboard/workBoard"));
 const Divisions = lazy(() => import("../divisions/divisions"));
 const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
+const TimeLine = lazy(() => import("../timeLine/timeLine"));
 const Admin = lazy(() => import("../admin/admin"));
 
 const Router: React.FC = () => {
@@ -17,6 +18,7 @@ const Router: React.FC = () => {
     { path: "/workboard", component: WorkBoard },
     { path: "/divisions", component: Divisions },
     { path: "/teamMembers", component: TeamMembers },
+    { path: "/timeline", component: TimeLine },
     { path: "/admin", component: Admin },
   ];
 

@@ -13,6 +13,7 @@
     "@types/react-router-dom": "^5.3.3",
     "bootstrap": "^4.6.0",
     "chart.js": "^4.3.0",
+    "gantt-task-react": "^0.3.9",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-chartjs-2": "^5.2.0",

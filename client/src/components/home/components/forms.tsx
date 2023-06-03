@@ -7,7 +7,7 @@ const Forms: React.FC = () => {
   const [showSignIn, setShowSignIn] = useState<boolean>(true);
   return (
     <div style={{ height: "100vh" }} className="p-5">
-      <div className="Home__logo d-flex flex-row justify-content-start p-5">
+      <div className="Home__logo p-5">
         <SiOpenproject />
         <span>&nbsp;sthana</span>
       </div>

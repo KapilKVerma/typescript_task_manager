@@ -54,7 +54,7 @@ export const navLinks: navLink[] = [
   {
     title: "Timeline",
     icon: <MdOutlineViewTimeline size={"1.25rem"} />,
-    path: "/",
+    path: "/timeline",
   },
   {
     title: "Admin",

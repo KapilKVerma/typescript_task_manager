@@ -1,13 +1,14 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-import { BsListUl, BsGrid } from "react-icons/bs";
+import { BsListUl, BsFillGridFill } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 
 interface Props {
-  setListView: React.Dispatch<React.SetStateAction<Boolean>>;
+  listView: boolean;
+  setListView: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TeamMembersHeader: React.FC<Props> = ({ setListView }) => {
+const TeamMembersHeader: React.FC<Props> = ({ listView, setListView }) => {
   return (
     <>
       <div className="d-flex flex-row justify-content-between">
@@ -34,12 +35,20 @@ const TeamMembersHeader: React.FC<Props> = ({ setListView }) => {
 
         {/* Option Buttons */}
         <section className="d-flex flex-row justify-content-end">
-          <Button variant="light" onClick={() => setListView(true)}>
+          <Button
+            variant={listView ? "dark" : "light"}
+            onClick={() => setListView(true)}
+            active={listView}
+          >
             <BsListUl size={"1.25rem"} />
           </Button>
           <div className="m-1" />
-          <Button variant="light" onClick={() => setListView(false)}>
-            <BsGrid size={"1.25rem"} />
+          <Button
+            variant={!listView ? "dark" : "light"}
+            onClick={() => setListView(false)}
+            active={!listView}
+          >
+            <BsFillGridFill size={"1.25rem"} />
           </Button>
         </section>
       </div>
