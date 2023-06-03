@@ -11,11 +11,6 @@ import {
 } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
 
-type Progress = {
-  progressColor: string;
-  progressSelectedColor: string;
-};
-
 let tasks: Task[] = [
   {
     start: new Date(2020, 1, 1),
@@ -38,7 +33,7 @@ let tasks: Task[] = [
     styles: { progressColor: "#5096F7", progressSelectedColor: "#5096F7" },
   },
   {
-    start: new Date(2020, 1, 4),
+    start: new Date(2020, 1, 3),
     end: new Date(2020, 1, 6),
     name: "Task 2",
     id: "task 2",
@@ -87,13 +82,7 @@ const TimeLine = () => {
   return (
     <>
       <AppWrapper>
-        <div
-          style={{
-            backgroundColor: "rgba(255,255,255,0.5)",
-            borderRadius: "5px",
-          }}
-          className="p-3"
-        >
+        <div style={{ backgroundColor: "rgba(255,255,255)" }}>
           <Gantt tasks={tasks} />
         </div>
       </AppWrapper>
