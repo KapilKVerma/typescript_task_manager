@@ -9,6 +9,7 @@ import { Project } from "../../../models/project.model";
 import { tasks } from "../../../models/task.model";
 import TasksList from "../../tasks/components/tasksList";
 import NewTask from "../../forms/newTask/newTask";
+import dayjs from "dayjs";
 
 interface Props {
   project: Project;
@@ -36,7 +37,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             <div className="w-75">{`${project.name}`}</div>
             <Button
               size="sm"
-              variant="light"
+              variant="dark"
               onClick={() => setProjectDetail(null)}
               style={{ position: "absolute", right: "0" }}
             >
@@ -63,12 +64,17 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             </ProgressBar>
           </Col>
 
-          <Col lg={3}>
+          <Col lg={2}>
             <h6>Started on</h6>
-            <h6>{new Date(project.startDate).toLocaleDateString()}</h6>
+            <h6>{dayjs(project.startDate).format("DD/MM/YYYY")}</h6>
           </Col>
 
-          <Col lg={3}>
+          <Col lg={2}>
+            <h6>Ends on</h6>
+            <h6>{dayjs(project.endDate).format("DD/MM/YYYY")}</h6>
+          </Col>
+
+          <Col lg={2}>
             <h6>Budget</h6>
             <h6>${project.budget}</h6>
           </Col>
@@ -86,7 +92,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
                 {teamMembers.slice(0, 6).map((member, index) => {
                   return (
                     <span
-                      className="team__member__card--image m-0 mb-1"
+                      className="team__member__card--image m-1"
                       key={index}
                       style={{
                         backgroundImage: `url(${member.profileImg})`,
@@ -106,7 +112,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
                 {teamMembers.slice(6, 8).map((member, index) => {
                   return (
                     <span
-                      className="team__member__card--image m-0 mb-1"
+                      className="team__member__card--image m-1"
                       style={{
                         backgroundImage: `url(${member.profileImg})`,
                         width: "2.5rem",
@@ -136,7 +142,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             variant="info"
             onClick={() => setShowNewTaskForm(!showNewTaskForm)}
           >
-            {showNewTaskForm ? <span>Close</span> : <span>New Task</span>}
+            {showNewTaskForm ? <span>Close</span> : <span>Add Task</span>}
           </Button>
         </div>
 

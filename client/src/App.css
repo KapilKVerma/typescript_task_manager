@@ -12,9 +12,7 @@
 }
 
 .Home__title {
-  background-image: url(https://images.unsplash.com/photo-1656274404460-14427bdd5fff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1992&q=80);
- background-image: url(https://img.freepik.com/free-vector/geometric-mural-wallpaper_23-2148704230.jpg?w=1800&t=st=1685798966~exp=1685799566~hmac=0729fac7eb317d5fdf362009c481853590fdbfe511de6ea4bcbf8939f481383d);
- background-image: url(https://img.freepik.com/free-vector/geometric-mural-wallpaper-design_23-2148671391.jpg?w=1800&t=st=1685799143~exp=1685799743~hmac=c9f3cba90cb5603b7bd0c2cf3b83dbc80fda53cb7de8874813a730a374601d1f);
+  background-image: url(https://img.freepik.com/free-vector/geometric-mural-wallpaper-design_23-2148671391.jpg?w=1800&t=st=1685799143~exp=1685799743~hmac=c9f3cba90cb5603b7bd0c2cf3b83dbc80fda53cb7de8874813a730a374601d1f);
   height: 100vh;
   background-position: center;
   background-size: cover;

@@ -1,14 +1,7 @@
 import React from "react";
 import AppWrapper from "../wrapperComponents/appWrapper";
 
-import {
-  Gantt,
-  Task,
-  EventOption,
-  StylingOption,
-  ViewMode,
-  DisplayOption,
-} from "gantt-task-react";
+import { Gantt, Task } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
 
 let tasks: Task[] = [

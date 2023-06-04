@@ -7,6 +7,7 @@ import { Project } from "../../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { teamMembers } from "../../../models/member.model";
+import dayjs from "dayjs";
 
 interface Props {
   project: Project;
@@ -65,7 +66,7 @@ const ProjectCard: React.FC<Props> = (props) => {
 
             <Col lg={3}>
               <h6>Started on</h6>
-              <h6>{new Date(project.startDate).toLocaleDateString()}</h6>
+              <h6>{dayjs(project.startDate).format("DD/MM/YYYY")}</h6>
             </Col>
 
             <Col lg={3}>
@@ -74,46 +75,44 @@ const ProjectCard: React.FC<Props> = (props) => {
             </Col>
           </Row>
           <hr />
-          <Row>
-            <Col>
-              <section className="mb-3">
-                <h6>Team Member(s)</h6>
-                <Row className="member__skills--list m-0 p-0 ">
-                  {teamMembers.slice(0, 6).map((member, index) => {
-                    return (
-                      <span
-                        className="team__member__card--image m-0 mb-1"
-                        key={index}
-                        style={{
-                          backgroundImage: `url(${member.profileImg})`,
-                          width: "2.5rem",
-                          height: "2.5rem",
-                        }}
-                      />
-                    );
-                  })}
-                </Row>
-              </section>
 
-              <section>
-                <h6>Project Manager(s)</h6>
-                <Row className="member__skills--list m-0 p-0 ">
-                  {teamMembers.slice(6, 8).map((member, index) => {
-                    return (
-                      <span
-                        className="team__member__card--image m-0 mb-1"
-                        style={{
-                          backgroundImage: `url(${member.profileImg})`,
-                          width: "2.5rem",
-                          height: "2.5rem",
-                        }}
-                      />
-                    );
-                  })}
-                </Row>
-              </section>
-            </Col>
-          </Row>
+          <section className="mb-3">
+            <h6>Team Member(s)</h6>
+            <Row className="member__skills--list m-0 p-0">
+              {teamMembers.slice(0, 6).map((member, index) => {
+                return (
+                  <span
+                    className="team__member__card--image m-1"
+                    key={index}
+                    style={{
+                      backgroundImage: `url(${member.profileImg})`,
+                      width: "2.5rem",
+                      height: "2.5rem",
+                    }}
+                  />
+                );
+              })}
+            </Row>
+          </section>
+
+          <section>
+            <h6>Project Manager(s)</h6>
+            <Row className="member__skills--list m-0 p-0">
+              {teamMembers.slice(6, 8).map((member, index) => {
+                return (
+                  <span
+                    className="team__member__card--image m-1"
+                    key={index}
+                    style={{
+                      backgroundImage: `url(${member.profileImg})`,
+                      width: "2.5rem",
+                      height: "2.5rem",
+                    }}
+                  />
+                );
+              })}
+            </Row>
+          </section>
         </section>
       </div>
     </>
