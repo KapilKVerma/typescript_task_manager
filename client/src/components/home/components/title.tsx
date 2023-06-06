@@ -1,9 +1,13 @@
 import React from "react";
 import Features from "./features";
+import homeBackground from "../../../images/home-background.jpg";
 
 const Title: React.FC = () => {
   return (
-    <div className="Home__title">
+    <div
+      className="Home__title"
+      style={{ backgroundImage: `url(${homeBackground})` }}
+    >
       <div className="Home__title__container">
         <section className="m-5">
           <h1 className="text-center">Manage projects with ease</h1>
