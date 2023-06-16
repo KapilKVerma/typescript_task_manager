@@ -148,7 +148,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
 
         <div>
           {showNewTaskForm ? (
-            <NewTask tasks={tasks} setClose={setShowNewTaskForm} />
+            <NewTask setClose={setShowNewTaskForm} />
           ) : (
             <TasksList taskList={tasks.slice(0, 5)} />
           )}

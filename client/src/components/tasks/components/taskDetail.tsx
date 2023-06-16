@@ -4,7 +4,7 @@ import { BiTrash, BiEdit, BiCheck, BiExpand } from "react-icons/bi";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { MdOutlineTask } from "react-icons/md";
 import { Task } from "../../../models/task.model";
-import SelectButton from "../../UIComponents/selectButton";
+import SelectMember from "../../UIComponents/selectMember";
 import { teamMembers } from "../../../models/member.model";
 
 interface Props {
@@ -56,10 +56,10 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
                   )}
                   &nbsp;&nbsp;|&nbsp;&nbsp;Due:&nbsp;&nbsp;
                   {task.endDate.toDateString()}&nbsp;&nbsp;|&nbsp;&nbsp;
-                  <SelectButton
+                  {/* <SelectButton
                     title={`${member1.firstName} ${member1.lastName}`}
                     image={member1.profileImg}
-                  />
+                  /> */}
                 </h6>
               </section>
 

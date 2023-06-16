@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
+
 interface Props {
   setButtonActive: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -9,7 +9,7 @@ interface Props {
 const SignUp: React.FC<Props> = ({ setButtonActive }) => {
   return (
     <>
-      <Container>
+      <div className="w-75">
         <h1>Create your account</h1>{" "}
         <h5>
           Have an account?
@@ -52,7 +52,7 @@ const SignUp: React.FC<Props> = ({ setButtonActive }) => {
             Submit
           </Button>
         </Form>
-      </Container>
+      </div>
     </>
   );
 };

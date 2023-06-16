@@ -1,4 +1,5 @@
 export type Project = {
+  id: number;
   name: string;
   description: string;
   startDate: Date;
@@ -13,6 +14,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: 1,
     name: "Website Redesign",
     description:
       "Redesigning the company website for improved user experience and modern look.",
@@ -26,6 +28,7 @@ export const projects: Project[] = [
     purpose: "Enhance brand presence and drive more conversions.",
   },
   {
+    id: 2,
     name: "Mobile App Development",
     description:
       "Building a mobile app to provide seamless access to our services on iOS and Android.",
@@ -39,6 +42,7 @@ export const projects: Project[] = [
     purpose: "Expand our reach and engage with mobile users.",
   },
   {
+    id: 3,
     name: "Data Analytics Platform",
     description:
       "Creating a centralized platform for analyzing and visualizing business data.",
@@ -52,6 +56,7 @@ export const projects: Project[] = [
     purpose: "Improve decision-making through data-driven insights.",
   },
   {
+    id: 4,
     name: "E-commerce Integration",
     description:
       "Integrating our online store with a third-party payment gateway and inventory system.",
@@ -66,6 +71,7 @@ export const projects: Project[] = [
       "Streamline the online purchasing process and inventory management.",
   },
   {
+    id: 5,
     name: "Social Media Campaign",
     description:
       "Launching a targeted social media campaign to increase brand awareness and engagement.",
@@ -80,6 +86,7 @@ export const projects: Project[] = [
       "Grow our social media following and drive traffic to our website.",
   },
   {
+    id: 6,
     name: "Network Infrastructure Upgrade",
     description:
       "Upgrading our network infrastructure to improve performance and security.",
@@ -93,6 +100,7 @@ export const projects: Project[] = [
     purpose: "Enhance network reliability and protect against cyber threats.",
   },
   {
+    id: 7,
     name: "Training and Development Program",
     description:
       "Implementing a comprehensive training and development program for employees.",
@@ -106,6 +114,7 @@ export const projects: Project[] = [
     purpose: "Invest in employee growth and improve overall performance.",
   },
   {
+    id: 8,
     name: "New Product Launch",
     description: "Launching a new product line targeting the youth market.",
     startDate: new Date("2023-08-10"),
@@ -118,6 +127,7 @@ export const projects: Project[] = [
     purpose: "Expand our product offerings and capture a new customer segment.",
   },
   {
+    id: 9,
     name: "Customer Support Portal",
     description:
       "Building an online portal for customers to access support resources and submit tickets.",
@@ -131,6 +141,7 @@ export const projects: Project[] = [
     purpose: "Improve customer experience and streamline support processes.",
   },
   {
+    id: 10,
     name: "Market Research Study",
     description:
       "Conducting a comprehensive market research study to identify new business opportunities.",
@@ -144,6 +155,7 @@ export const projects: Project[] = [
     purpose: "Gain insights into market trends and customer preferences.",
   },
   {
+    id: 11,
     name: "IT Infrastructure Audit",
     description:
       "Performing an audit of our IT infrastructure to identify vulnerabilities and recommend improvements.",
@@ -157,6 +169,7 @@ export const projects: Project[] = [
     purpose: "Ensure the security and efficiency of our IT systems.",
   },
   {
+    id: 12,
     name: "Content Marketing Campaign",
     description:
       "Launching a content marketing campaign to attract and engage our target audience.",
@@ -171,6 +184,7 @@ export const projects: Project[] = [
       "Build brand authority and generate leads through valuable content.",
   },
   {
+    id: 13,
     name: "Supplier Evaluation and Selection",
     description:
       "Evaluating and selecting new suppliers to improve the quality and cost-effectiveness of our materials.",
@@ -184,6 +198,7 @@ export const projects: Project[] = [
     purpose: "Optimize our supply chain and reduce costs.",
   },
   {
+    id: 14,
     name: "Employee Wellness Program",
     description:
       "Implementing a wellness program to promote the physical and mental well-being of our employees.",
@@ -197,6 +212,7 @@ export const projects: Project[] = [
     purpose: "Improve employee morale and productivity.",
   },
   {
+    id: 15,
     name: "Sales Performance Dashboard",
     description:
       "Developing a dashboard to track and analyze sales performance metrics in real-time.",
@@ -210,6 +226,7 @@ export const projects: Project[] = [
     purpose: "Monitor sales performance and identify areas for improvement.",
   },
   {
+    id: 16,
     name: "Inventory Management System",
     description:
       "Building a centralized system to manage inventory across multiple locations.",
@@ -223,6 +240,7 @@ export const projects: Project[] = [
     purpose: "Optimize inventory levels and improve supply chain efficiency.",
   },
   {
+    id: 17,
     name: "Website Localization",
     description:
       "Localizing our website to target international markets and support multiple languages.",
@@ -236,6 +254,7 @@ export const projects: Project[] = [
     purpose: "Expand our global reach and cater to diverse customer segments.",
   },
   {
+    id: 18,
     name: "Cybersecurity Training Program",
     description:
       "Implementing a comprehensive cybersecurity training program for employees.",
@@ -249,6 +268,7 @@ export const projects: Project[] = [
     purpose: "Enhance employee awareness and mitigate security risks.",
   },
   {
+    id: 19,
     name: "Product Packaging Redesign",
     description:
       "Redesigning product packaging to enhance brand appeal and stand out on store shelves.",
@@ -262,6 +282,7 @@ export const projects: Project[] = [
     purpose: "Improve product visibility and attract more customers.",
   },
   {
+    id: 20,
     name: "Customer Satisfaction Survey",
     description:
       "Conducting a customer satisfaction survey to gather feedback and identify areas for improvement.",
@@ -275,6 +296,7 @@ export const projects: Project[] = [
     purpose: "Enhance customer experience and drive customer loyalty.",
   },
   {
+    id: 21,
     name: "Supply Chain Optimization",
     description:
       "Optimizing our supply chain processes to reduce lead times and improve cost-efficiency.",

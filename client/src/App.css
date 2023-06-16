@@ -152,6 +152,11 @@
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25);
 }
 
+.input__field--error {
+  color: red;
+  font-size: 0.9rem;
+}
+
 .search__bar {
   display: flex;
   flex-direction: row;

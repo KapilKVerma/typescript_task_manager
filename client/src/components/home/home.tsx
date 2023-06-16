@@ -147,7 +147,7 @@ const Home: React.FC = () => {
           </section>
 
           <section
-            className="p-5 w-100"
+            className="p-3 w-100"
             style={{ position: "absolute", bottom: "0" }}
           >
             <div className="d-flex flex-row justify-content-between">

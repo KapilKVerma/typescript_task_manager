@@ -1,28 +1,115 @@
-import React from "react";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { teamMembers } from "../../../models/member.model";
-import SelectButton from "../../UIComponents/selectButton";
+import {
+  teamMembers,
+  TeamMember,
+  handleFunction,
+} from "../../../models/member.model";
+import SelectMember from "../../UIComponents/selectMember";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { string, object, number, TypeOf } from "zod";
+
+const newProjectSchema = object({
+  title: string().nonempty("Title is required"),
+  budget: number()
+    .nonnegative()
+    .refine((value) => value > 0, "Budget is required"),
+  description: string().nonempty("Description is required"),
+  purpose: string().nonempty("Purpose is required"),
+  startDate: string().nonempty("Start date is required"),
+  endDate: string().nonempty("Completion date is required"),
+}).refine((data) => new Date(data.startDate) <= new Date(data.endDate), {
+  message: "End date must be greater than completion date",
+  path: ["endDate"],
+});
+
+type NewProjectInput = TypeOf<typeof newProjectSchema>;
+
 interface Props {
   setClose: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const NewProject: React.FC<Props> = ({ setClose }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NewProjectInput>({
+    resolver: zodResolver(newProjectSchema),
+    defaultValues: {
+      title: "",
+      budget: 0,
+      description: "",
+      purpose: "",
+      startDate: "",
+      endDate: "",
+    },
+  });
+
+  const [projectManagers, setProjectManagers] = useState<TeamMember[]>([]);
+  const [managersError, setManagersError] = useState<string>("");
+
+  const [projectTmMembers, setProjectTmMembers] = useState<TeamMember[]>([]);
+  const [tMemberError, setTMemberError] = useState<string>("");
+
+  const addMember: handleFunction = (value) => {
+    let itemsList = [...projectManagers];
+
+    let check = itemsList.filter((item) => item.id === value.id);
+
+    if (check.length === 0) {
+      itemsList.push(value);
+      setManagersError("");
+    }
+    setProjectManagers(itemsList);
+
+    console.log("added", itemsList);
+  };
+
+  const removeMember: handleFunction = (value) => {
+    let itemsList = [...projectManagers];
+    if (itemsList.length === 0) {
+      setManagersError("Project manager not selected");
+    }
+    if (itemsList.length > 0) {
+      let check = itemsList.filter((member) => member.id !== value.id);
+      setProjectManagers(check);
+      console.log("removed", check);
+    }
+  };
+
+  const sumbit = (data: any) => {
+    if (projectManagers.length === 0) {
+      setManagersError("Project manager not selected");
+      return;
+    }
+
+    if (projectManagers.length >= 2) {
+      setManagersError("Only 2 manager should be selected");
+      return;
+    }
+
+    data.managers = projectManagers;
+    console.log("new project", data);
+  };
   return (
     <>
-      <form className="object__form">
+      <form className="object__form" onSubmit={handleSubmit(sumbit)}>
         <section className="mb-3">
           <div className="input__field mb-3">
             <label>Project Title:</label>
             <br></br>
             <input
               type="text"
-              name="title"
               placeholder="Enter Project Title"
               className="input__field--text"
-
-              //   value={newTaskState?.title}
-              //   onChange={handleInputChange}
+              {...register("title")}
             />
+            {errors?.title?.message && (
+              <p className="input__field--error">{errors.title.message}</p>
+            )}
           </div>
 
           <div className="input__field mb-3">
@@ -30,39 +117,43 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
             <br></br>
             <input
               type="number"
-              name="budget"
               className="input__field--number"
               placeholder="Enter budget"
-
-              //   value={newTaskState?.title}
-              //   onChange={handleInputChange}
+              {...register("budget", { valueAsNumber: true })}
             />
+            {errors?.budget?.message && (
+              <p className="input__field--error">{errors.budget.message}</p>
+            )}
           </div>
 
           <div className="input__field mb-3">
             <label>Project Description:</label>
             <br></br>
             <textarea
-              name="description"
               rows={2}
               placeholder="Enter Project Description"
               className="input__field--text"
-              //   value={newTaskState?.description}
-              //   onChange={handleInputChange}
+              {...register("description")}
             />
+            {errors?.description?.message && (
+              <p className="input__field--error">
+                {errors.description.message}
+              </p>
+            )}
           </div>
 
           <div className="input__field mb-3">
             <label>Project Purpose:</label>
             <br></br>
             <textarea
-              name="purpose"
               rows={2}
               placeholder="Enter Project Purpose"
               className="input__field--text"
-              //   value={newTaskState?.description}
-              //   onChange={handleInputChange}
+              {...register("purpose")}
             />
+            {errors?.purpose?.message && (
+              <p className="input__field--error">{errors.purpose.message}</p>
+            )}
           </div>
 
           <div className="d-flex flex-row justify-content-between mb-3">
@@ -70,21 +161,26 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
               <label>Start Date:</label>
               <input
                 type="date"
-                name="startDate"
                 className="input__field--date"
-                //   onChange={handleDateChange}
+                {...register("startDate", { valueAsDate: false })}
               />
+              {errors?.startDate?.message && (
+                <p className="input__field--error">
+                  {errors.startDate.message}
+                </p>
+              )}
             </div>
             <div className="m-2"></div>
             <div className="input__field w-50">
               <label>Completion Date:</label>
               <input
                 type="date"
-                name="endDate"
                 className="input__field--date"
-
-                //   onChange={handleDateChange}
+                {...register("endDate", { valueAsDate: false })}
               />
+              {errors?.endDate?.message && (
+                <p className="input__field--error">{errors.endDate.message}</p>
+              )}
             </div>
           </div>
 
@@ -94,31 +190,32 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
               {teamMembers.map((member, index) => {
                 return (
                   <span key={index}>
-                    <SelectButton
-                      title={`${member.firstName} ${member.lastName}`}
-                      image={member.profileImg}
+                    <SelectMember
+                      member={member}
+                      addMember={addMember}
+                      removeMember={removeMember}
                     />
                   </span>
                 );
               })}
             </Row>
+            {managersError && (
+              <p className="input__field--error">{managersError}</p>
+            )}
           </div>
 
-          <div className="input__field">
+          {/* <div className="input__field">
             <label>Project Team Members:</label>
             <Row className="input__field__select--container">
               {teamMembers.map((member, index) => {
                 return (
                   <span key={index}>
-                    <SelectButton
-                      title={`${member.firstName} ${member.lastName}`}
-                      image={member.profileImg}
-                    />
+                    <SelectButton member={member} addMember={addMember} />
                   </span>
                 );
               })}
             </Row>
-          </div>
+          </div> */}
         </section>
 
         <section>
@@ -132,12 +229,7 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
               Close
             </Button>
             <div className="m-1"></div>
-            <Button
-              variant="info"
-              type="submit"
-              className="form__button"
-              // onClick={submitNewTask}
-            >
+            <Button variant="info" type="submit" className="form__button">
               Submit
             </Button>
           </div>
