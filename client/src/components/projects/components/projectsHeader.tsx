@@ -5,13 +5,24 @@ import { AiOutlineSearch } from "react-icons/ai";
 import NewProject from "../../forms/newProject/newProject";
 
 interface Props {
+  projectsList: Project[];
   projectDetail: Project | null;
   showForm: boolean;
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  setProjectsToShow: React.Dispatch<React.SetStateAction<Project[]>>;
 }
 
 const ProjectsHeader: React.FC<Props> = (props) => {
-  const { projectDetail, showForm, setShowForm } = props;
+  const { projectsList, projectDetail, showForm } = props;
+  const { setShowForm, setProjectsToShow } = props;
+
+  const filterProjectsList = (value: string, projectsList: Project[]) => {
+    let result = projectsList.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setProjectsToShow(result);
+  };
+
   return (
     <>
       <div className="d-flex flex-row justify-content-between">
@@ -25,6 +36,9 @@ const ProjectsHeader: React.FC<Props> = (props) => {
                   name="title"
                   placeholder="Enter project name..."
                   className="search__bar---input"
+                  onChange={(e) => {
+                    filterProjectsList(e.target.value, projectsList);
+                  }}
                 />
                 <Button
                   variant="dark"

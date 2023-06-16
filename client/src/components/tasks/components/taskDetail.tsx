@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { BiTrash, BiEdit, BiCheck, BiExpand } from "react-icons/bi";
-import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { MdOutlineTask } from "react-icons/md";
 import { Task } from "../../../models/task.model";
-import SelectMember from "../../UIComponents/selectMember";
 import { teamMembers } from "../../../models/member.model";
+import RenderButton from "../../UIComponents/renderButton";
 
 interface Props {
   task: Task;
@@ -30,7 +28,7 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
   return (
     <>
       {!editTask ? (
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", padding: ".7rem" }}>
           {/*Task Icon */}
           <section>
             <span className="tasks__list__item--icon">
@@ -55,11 +53,7 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
                     </span>
                   )}
                   &nbsp;&nbsp;|&nbsp;&nbsp;Due:&nbsp;&nbsp;
-                  {task.endDate.toDateString()}&nbsp;&nbsp;|&nbsp;&nbsp;
-                  {/* <SelectButton
-                    title={`${member1.firstName} ${member1.lastName}`}
-                    image={member1.profileImg}
-                  /> */}
+                  {task.endDate.toDateString()}
                 </h6>
               </section>
 
@@ -97,26 +91,20 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
 
           {/* Menu Button */}
           <section>
-            <div className="task__menu--container">
-              <Button
-                size="sm"
-                variant="light"
+            <div className="task__menu--container d-flex flex-row justify-content-start">
+              <span
                 className="mr-1"
                 onClick={() => {
                   setShowDetails(!showDetails);
                   setShowMenuItems(false);
                 }}
               >
-                <BiExpand size={"1.25rem"} />
-              </Button>
+                <RenderButton title={""} type={"expandButton"} />
+              </span>
 
-              <Button
-                size="sm"
-                variant="light"
-                onClick={() => setShowMenuItems(!showMenuItems)}
-              >
-                <HiOutlineMenuAlt2 size={"1.25rem"} />
-              </Button>
+              <span onClick={() => setShowMenuItems(!showMenuItems)}>
+                <RenderButton title={""} type={"menuButton"} />
+              </span>
             </div>
             <div
               className="task__menu--list"
@@ -124,32 +112,22 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
                 display: showMenuItems ? "block" : "none",
               }}
             >
-              <Button
-                size="sm"
-                variant="light"
-                className="w-100 text-left mb-1"
-              >
-                <BiCheck size={"1.25rem"} />
-                &nbsp;&nbsp;Complete
-              </Button>
+              <span onClick={() => setShowMenuItems(false)}>
+                <RenderButton title={"Complete"} type={"completeButton"} />
+              </span>
               <br />
-              <Button
-                size="sm"
-                variant="light"
-                className="w-100 text-left mb-1"
+              <span
                 onClick={() => {
                   setEditTask(true);
                   setShowMenuItems(false);
                 }}
               >
-                <BiEdit size={"1.25rem"} />
-                &nbsp;&nbsp;Edit
-              </Button>
+                <RenderButton title={"Edit"} type={"editButton"} />
+              </span>
               <br />
-              <Button size="sm" variant="light" className="w-100 text-left">
-                <BiTrash size={"1.25rem"} />
-                &nbsp;&nbsp;Delete
-              </Button>
+              <span onClick={() => setShowMenuItems(false)}>
+                <RenderButton title={"Delete"} type={"deleteButton"} />
+              </span>
             </div>
           </section>
         </div>

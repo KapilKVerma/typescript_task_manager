@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Project } from "../../../models/project.model";
-import { AiOutlineProject } from "react-icons/ai";
+import ProjectCardWrapper from "../../wrapperComponents/projectCardWrapper";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { teamMembers } from "../../../models/member.model";
 import dayjs from "dayjs";
@@ -19,14 +19,7 @@ const ProjectCard: React.FC<Props> = (props) => {
   const { project, setProjectDetail, setShowForm } = props;
   return (
     <>
-      <div className="project__card">
-        {/* Card Icon */}
-        <section>
-          <span className="project__card--icon">
-            <AiOutlineProject size={"2rem"} />
-          </span>
-        </section>
-
+      <ProjectCardWrapper>
         {/* Card header */}
         <section>
           <h5
@@ -114,7 +107,7 @@ const ProjectCard: React.FC<Props> = (props) => {
             </Row>
           </section>
         </section>
-      </div>
+      </ProjectCardWrapper>
     </>
   );
 };

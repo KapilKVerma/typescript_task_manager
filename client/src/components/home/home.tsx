@@ -28,47 +28,35 @@ const Home: React.FC = () => {
               <Button
                 variant={buttonActive === 0 ? "dark" : "light"}
                 className="form__button"
-                size="lg"
-                onClick={() => {
-                  setButtonActive(0);
-                }}
+                onClick={() => setButtonActive(0)}
               >
                 Home
               </Button>
-              <Button
+              {/* <Button
                 variant={buttonActive === 1 ? "dark" : "light"}
                 className="form__button"
-                size="lg"
-                onClick={() => {
-                  setButtonActive(1);
-                }}
+                onClick={() => setButtonActive(1)}
               >
                 About
-              </Button>
+              </Button> */}
               <Button
                 variant={buttonActive === 2 ? "dark" : "light"}
                 className="form__button"
-                size="lg"
-                onClick={() => {
-                  setButtonActive(2);
-                }}
+                onClick={() => setButtonActive(2)}
               >
                 Sign In
               </Button>
               <Button
                 variant={buttonActive === 3 ? "dark" : "light"}
                 className="form__button"
-                size="lg"
-                onClick={() => {
-                  setButtonActive(3);
-                }}
+                onClick={() => setButtonActive(3)}
               >
                 Sign Up
               </Button>
             </ButtonGroup>
           </section>
 
-          <section className="p-5">
+          <section className="p-3 pl-5 pr-5">
             <div className="Home__logo mb-4">
               <SiOpenproject />
               <span>&nbsp;sthana</span>
@@ -147,7 +135,7 @@ const Home: React.FC = () => {
           </section>
 
           <section
-            className="p-3 w-100"
+            className="p-3 pl-5 pr-5 w-100"
             style={{ position: "absolute", bottom: "0" }}
           >
             <div className="d-flex flex-row justify-content-between">

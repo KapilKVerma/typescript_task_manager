@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AppWrapper from "../wrapperComponents/appWrapper";
-import { AiOutlineBuild } from "react-icons/ai";
-import DivisionCard from "../wrapperComponents/divisionCard";
+import DivisionCardWrapper from "../wrapperComponents/divisionCardWrapper";
 
 const Divisions: React.FC = () => {
   const divisons = [
@@ -22,52 +21,18 @@ const Divisions: React.FC = () => {
 
   return (
     <>
-    <AppWrapper>
-      <Row className="m-0">
-        {divisons.map((division, index) => {
-          return (
-            <Col lg={4} md={6} sm={12} key={index} className="p-2">
-              <DivisionCard>
-                <h5>{`${division}`}</h5>
-              </DivisionCard>
-            </Col>
-          );
-        })}
-      </Row>
-
-      <div
-        className="p-5 d-flex flex-row justify-content-start"
-        style={{ position: "relative" }}
-      >
-        {["", "", ""].map((_, index) => {
-          let number = index * factor;
-          return (
-            <div
-              className="circle"
-              style={{ left: number, opacity: show }}
-            ></div>
-          );
-        })}
-      </div>
-      <div className="mt-5">
-        <button
-          onClick={() => {
-            setFactor(90);
-          }}
-        >
-          Expand
-        </button>
-      </div>
-
-      <div className="mt-2">
-        <button
-          onClick={() => {
-            setFactor(50);
-          }}
-        >
-          Squeez
-        </button>
-      </div>
+      <AppWrapper>
+        <Row className="m-0">
+          {divisons.map((division, index) => {
+            return (
+              <Col lg={4} md={6} sm={12} key={index} className="p-2">
+                <DivisionCardWrapper>
+                  <h5>{`${division}`}</h5>
+                </DivisionCardWrapper>
+              </Col>
+            );
+          })}
+        </Row>
       </AppWrapper>
     </>
   );

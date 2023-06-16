@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const DivisionCard: React.FC<Props> = ({ children }) => {
+const DivisionCardWrapper: React.FC<Props> = ({ children }) => {
   return (
     <div className="division__card">
       <span className="division__card--icon">
@@ -16,4 +16,4 @@ const DivisionCard: React.FC<Props> = ({ children }) => {
   );
 };
 
-export default DivisionCard;
+export default DivisionCardWrapper;

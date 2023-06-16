@@ -2,27 +2,33 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AppWrapper from "../wrapperComponents/appWrapper";
-import { teamMembers } from "../../models/member.model";
+import { teamMembers, TeamMember } from "../../models/member.model";
 import TeamMembersHeader from "./components/teamMembersHeader";
 import MemberListCard from "../wrapperComponents/teamMember/memberListCard";
 import MemberGridCard from "../wrapperComponents/teamMember/memberGridCard";
 
 const TeamMembers: React.FC = () => {
   const [listView, setListView] = useState<boolean>(true);
+  const [membersToShow, setMembersToShow] = useState<TeamMember[]>(teamMembers);
 
   return (
     <>
       <AppWrapper>
         {/* Team Members Header */}
         <section>
-          <TeamMembersHeader listView={listView} setListView={setListView} />
+          <TeamMembersHeader
+            listView={listView}
+            setListView={setListView}
+            membersList={teamMembers}
+            setMembersToShow={setMembersToShow}
+          />
         </section>
 
         {/* Team members list view */}
         <section>
           {listView ? (
             <Row className="m-0 p-0 mt-3">
-              {teamMembers.map((member, index) => {
+              {membersToShow.map((member, index) => {
                 return (
                   <Col lg={12} md={12} sm={12} key={index} className="m-0 p-1">
                     <MemberListCard profileImage={member.profileImg}>
@@ -61,7 +67,7 @@ const TeamMembers: React.FC = () => {
         <section>
           {!listView ? (
             <Row className="m-0 p-0 mt-3">
-              {teamMembers.map((member, index) => {
+              {membersToShow.map((member, index) => {
                 return (
                   <Col lg={3} md={4} sm={6} key={index} className="m-0 p-1">
                     <MemberGridCard profileImage={member.profileImg}>

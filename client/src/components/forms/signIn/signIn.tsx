@@ -16,6 +16,7 @@ const loginSchema = object({
       return value.endsWith(`${allowedDomain}`);
     }, "Email must end with .com"),
   password: string()
+    .nonempty("Password is required")
     .min(8, "Password must be at least 8 characters long")
     .regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
@@ -65,11 +66,7 @@ const SignIn: React.FC<Props> = ({ setButtonActive }) => {
         <Form className="w-100 p-1 mt-4" onSubmit={handleSubmit(sumbit)}>
           <Form.Group className="mb-3">
             <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              {...register("email")}
-            />
+            <Form.Control type="email" {...register("email")} />
             {errors?.email?.message && (
               <Form.Text className="input__field--error">
                 {errors.email.message}
@@ -79,11 +76,7 @@ const SignIn: React.FC<Props> = ({ setButtonActive }) => {
 
           <Form.Group className="mb-4">
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-            />
+            <Form.Control type="password" {...register("password")} />
 
             {errors?.password?.message && (
               <Form.Text className="input__field--error">
