@@ -51,8 +51,8 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
   const [projectManagers, setProjectManagers] = useState<TeamMember[]>([]);
   const [managersError, setManagersError] = useState<string>("");
 
-  const [projectTmMembers, setProjectTmMembers] = useState<TeamMember[]>([]);
-  const [tMemberError, setTMemberError] = useState<string>("");
+  // const [projectTmMembers, setProjectTmMembers] = useState<TeamMember[]>([]);
+  // const [tMemberError, setTMemberError] = useState<string>("");
 
   const addMember: handleFunction = (value) => {
     let itemsList = [...projectManagers];
