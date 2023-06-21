@@ -1,5 +1,4 @@
 import { object, string, TypeOf } from "zod";
-import { z } from "zod";
 
 // Password Rules
 // At least one lowercase letter
