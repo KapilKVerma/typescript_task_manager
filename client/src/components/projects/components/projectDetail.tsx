@@ -6,11 +6,11 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { AiOutlineProject, AiOutlineClose } from "react-icons/ai";
 import { teamMembers } from "../../../models/member.model";
 import { Project } from "../../../models/project.model";
-import TasksList from "../../tasks/components/tasksList";
 import { Task } from "../../../models/task.model";
 import NewTask from "../../forms/newTask/newTask";
+import TaskDetail from "./taskDetail";
 import dayjs from "dayjs";
-
+import { serverUrl } from "../../../serverUrl";
 import axios from "axios";
 
 interface Props {
@@ -22,9 +22,22 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
   const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
   const [tasksList, setTasksList] = useState<Task[]>([]);
 
+  // Delete task handler
+  const handleDeleteTask = async (task: Task) => {
+    try {
+      const response = await axios.delete(
+        `${serverUrl}/api/0.1/tasks/${task.id}`
+      );
+      setTasksList(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  // Fetch tasks
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/0.1/tasks/`);
+      const response = await axios.get(`${serverUrl}/api/0.1/tasks/`);
       setTasksList(response.data);
     } catch (err: any) {
       console.log(err.message);
@@ -152,7 +165,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             {showNewTaskForm ? (
               <span>Add New Task </span>
             ) : (
-              <span>Associated Tasks </span>
+              <span>Associated Tasks ({tasksList.slice(0, 10).length})</span>
             )}
           </h5>
           <Button
@@ -167,7 +180,18 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
           {showNewTaskForm ? (
             <NewTask setClose={setShowNewTaskForm} />
           ) : (
-            <TasksList taskList={tasksList.slice(0, 5)} />
+            <div className="tasks__list__container" style={{ height: "20rem" }}>
+              {tasksList.slice(0, 10).map((task) => {
+                return (
+                  <div key={task.id} className="tasks__list__item">
+                    <TaskDetail
+                      task={task}
+                      handleDeleteTask={handleDeleteTask}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       </section>

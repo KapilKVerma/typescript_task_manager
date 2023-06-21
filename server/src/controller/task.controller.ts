@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
 import { CreateTaskInput } from "../schema/task.schema";
-import { findTasks } from "../service/task.service";
+import {
+  findAllTasks,
+  changeActiveStatus,
+  changeProgressStatus,
+  deleteTask,
+} from "../service/task.service";
 
 import TaskModel from "../model/task.model";
 
@@ -25,7 +30,40 @@ export async function createTaskHandler(
 
 export async function getTasksHandler(req: Request, res: Response) {
   try {
-    const tasks = await findTasks();
+    const tasks = await findAllTasks();
+    return res.send(tasks);
+  } catch (err: any) {
+    return res.status(500).send(err);
+  }
+}
+
+export async function updateTaskActiveStatus(req: Request, res: Response) {
+  try {
+    const taskId = parseInt(req.params.taskId);
+    const task = req.body;
+    const tasks = await changeActiveStatus(taskId, task);
+    return res.send(tasks);
+  } catch (err: any) {
+    return res.status(500).send(err);
+  }
+}
+
+export async function updateTaskProgressStatus(req: Request, res: Response) {
+  try {
+    const taskId = parseInt(req.params.taskId);
+    const task = req.body.task;
+    const status = req.body.status;
+    const tasks = await changeProgressStatus(taskId, task, status);
+    return res.send(tasks);
+  } catch (err: any) {
+    return res.status(500).send(err);
+  }
+}
+
+export async function deleteTaskHandler(req: Request, res: Response) {
+  try {
+    const taskId = parseInt(req.params.taskId);
+    const tasks = await deleteTask(taskId);
     return res.send(tasks);
   } catch (err: any) {
     return res.status(500).send(err);

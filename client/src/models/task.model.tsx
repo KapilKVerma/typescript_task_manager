@@ -7,4 +7,5 @@ export type Task = {
   createdOn: Date;
   inProgress: boolean;
   completed: boolean;
+  active: boolean;
 };

@@ -4,17 +4,24 @@ import { Task } from "../../../models/task.model";
 import TaskDetail from "./taskDetail";
 
 interface Props {
-  taskList: Task[];
+  tasksList: Task[];
+  handleTaskActive: (task: Task) => Promise<void>;
+  handleDeleteTask: (task: Task) => Promise<void>;
 }
 
-const TasksList: React.FC<Props> = ({ taskList }) => {
+const TasksList: React.FC<Props> = (props) => {
+  const { tasksList, handleTaskActive, handleDeleteTask } = props;
   return (
     <>
-      <div className="p-2">
-        {taskList.map((task) => {
+      <div className="tasks__list__container">
+        {tasksList.map((task) => {
           return (
             <div key={task.id} className="tasks__list__item">
-              <TaskDetail task={task} />
+              <TaskDetail
+                task={task}
+                handleTaskActive={handleTaskActive}
+                handleDeleteTask={handleDeleteTask}
+              />
             </div>
           );
         })}

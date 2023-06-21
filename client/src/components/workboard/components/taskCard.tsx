@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 
 interface Props {
   task: Task;
-  handleTaskStatus: (task: Task) => void;
+  handleTaskStatus: (task: Task, status: string) => void;
 }
 
 const TaskCard: React.FC<Props> = ({ task, handleTaskStatus }) => {
@@ -17,20 +17,6 @@ const TaskCard: React.FC<Props> = ({ task, handleTaskStatus }) => {
 
   const handleShow = () => setEditTask(true);
   const handleClose = () => setEditTask(false);
-
-  // Task status change handler
-  const handleChangeStatus = (status: string) => {
-    if (status === "start") {
-      task.inProgress = true;
-      task.completed = false;
-    }
-
-    if (status === "complete") {
-      task.inProgress = false;
-      task.completed = true;
-    }
-    handleTaskStatus(task);
-  };
 
   return (
     <>
@@ -55,7 +41,7 @@ const TaskCard: React.FC<Props> = ({ task, handleTaskStatus }) => {
               <span
                 onClick={() => {
                   setShowMenuItems(false);
-                  handleChangeStatus("start");
+                  handleTaskStatus(task, "start");
                 }}
               >
                 <RenderButton title={"Start"} type={"startButton"} />
@@ -77,7 +63,7 @@ const TaskCard: React.FC<Props> = ({ task, handleTaskStatus }) => {
               <span
                 onClick={() => {
                   setShowMenuItems(false);
-                  handleChangeStatus("complete");
+                  handleTaskStatus(task, "complete");
                 }}
               >
                 <RenderButton title={"Complete"} type={"completeButton"} />
@@ -99,7 +85,7 @@ const TaskCard: React.FC<Props> = ({ task, handleTaskStatus }) => {
               <span
                 onClick={() => {
                   setShowMenuItems(false);
-                  handleChangeStatus("start");
+                  handleTaskStatus(task, "start");
                 }}
               >
                 <RenderButton title={"Start"} type={"startButton"} />

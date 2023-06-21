@@ -225,8 +225,23 @@
   padding: 1rem;
   border-radius: 5px;
 }
+
+.tasks__list__container {
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  height: 82vh;
+  overflow-y: scroll;
+  padding-top: 0.7rem;
+  padding-left: 0.7rem;
+}
+
+.tasks__list__container::-webkit-scrollbar {
+  width: 5px;
+}
+
 .tasks__list__item {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.75);
   border-radius: 5px;
   margin-left: 1rem;
   margin-bottom: 0.25rem;

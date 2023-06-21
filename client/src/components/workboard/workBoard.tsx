@@ -7,15 +7,52 @@ import TaskCard from "./components/taskCard";
 import { Task } from "../../models/task.model";
 import { projects } from "../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
+import { serverUrl } from "../../serverUrl";
 import axios from "axios";
+
+enum taskFilters {
+  remaining,
+  inProgress,
+  completed,
+}
 
 const Workboard: React.FC = () => {
   const [tasksList, setTasksList] = useState<Task[]>([]);
 
+  // Tasks filter handler
+  const filterTasks = (tasks: Task[], status: number): Task[] => {
+    let result: Task[] = [];
+    if (status === taskFilters.remaining)
+      result = tasks.filter((task) => !task.completed && !task.inProgress);
+
+    if (status === taskFilters.inProgress)
+      result = tasks.filter((task) => !task.completed && task.inProgress);
+
+    if (status === taskFilters.completed)
+      result = tasks.filter((task) => task.completed && !task.inProgress);
+
+    return result;
+  };
+
+  //  Task progress status handler
+  const handleTaskStatus = async (task: Task, status: string) => {
+    try {
+      const response = await axios.put(
+        `${serverUrl}/api/0.1/tasks/${task.id}/progressStatus`,
+        { task, status }
+      );
+      setTasksList(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  // Fetch Tasks
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/0.1/tasks/`);
-      setTasksList(response.data);
+      const response = await axios.get(`${serverUrl}/api/0.1/tasks/`);
+      const tasks = response.data.filter((item: Task) => item.active === true);
+      setTasksList(tasks);
     } catch (err: any) {
       console.log(err.message);
     }
@@ -25,13 +62,6 @@ const Workboard: React.FC = () => {
     fetchTasks();
   }, []);
 
-  const handleTaskStatus = (task: Task) => {
-    let tasks = [...tasksList];
-    const taskIndex = tasks.findIndex((item) => item.id === task.id);
-    tasks[taskIndex] = task;
-    setTasksList(tasks);
-  };
-
   return (
     <>
       <AppWrapper>
@@ -40,17 +70,26 @@ const Workboard: React.FC = () => {
             <Row className="mb-4">
               <Col lg={4} md={4} sm={4}>
                 <div className="workboard__tasks__header">
-                  <h5>Remaining (7)</h5>
+                  <h5>
+                    Remaining (
+                    {filterTasks(tasksList, taskFilters.remaining).length})
+                  </h5>
                 </div>
               </Col>
               <Col lg={4} md={4} sm={4}>
                 <div className="workboard__tasks__header">
-                  <h5>In Progress (2)</h5>
+                  <h5>
+                    In Progress (
+                    {filterTasks(tasksList, taskFilters.inProgress).length})
+                  </h5>
                 </div>
               </Col>
               <Col lg={4} md={4} sm={4}>
                 <div className="workboard__tasks__header">
-                  <h5>Completed (2)</h5>
+                  <h5>
+                    Completed (
+                    {filterTasks(tasksList, taskFilters.completed).length})
+                  </h5>
                 </div>
               </Col>
             </Row>
@@ -58,10 +97,8 @@ const Workboard: React.FC = () => {
             <Row>
               <Col lg={4} md={4} sm={4} className="p-1">
                 <div className="workboard__tasks__list--container">
-                  {tasksList
-                    .filter((task) => !task.completed && !task.inProgress)
-                    .sort((a, b) => (a.endDate < b.endDate ? -1 : 1))
-                    .map((task, index) => {
+                  {filterTasks(tasksList, taskFilters.remaining).map(
+                    (task, index) => {
                       return (
                         <div
                           className="task__card mb-2 pb-1"
@@ -74,15 +111,14 @@ const Workboard: React.FC = () => {
                           />
                         </div>
                       );
-                    })}
+                    }
+                  )}
                 </div>
               </Col>
               <Col lg={4} md={4} sm={4} className="p-1">
                 <div className="workboard__tasks__list--container">
-                  {tasksList
-                    .filter((task) => !task.completed && task.inProgress)
-                    .sort((a, b) => (a.endDate < b.endDate ? -1 : 1))
-                    .map((task, index) => {
+                  {filterTasks(tasksList, taskFilters.inProgress).map(
+                    (task, index) => {
                       return (
                         <div
                           className="task__card mb-2 pb-1"
@@ -95,15 +131,14 @@ const Workboard: React.FC = () => {
                           />
                         </div>
                       );
-                    })}
+                    }
+                  )}
                 </div>
               </Col>
               <Col lg={4} md={4} sm={4} className="p-1">
                 <div className="workboard__tasks__list--container">
-                  {tasksList
-                    .filter((task) => task.completed && !task.inProgress)
-                    .sort((a, b) => (a.endDate < b.endDate ? -1 : 1))
-                    .map((task, index) => {
+                  {filterTasks(tasksList, taskFilters.completed).map(
+                    (task, index) => {
                       return (
                         <div
                           className="task__card mb-2 pb-1"
@@ -116,7 +151,8 @@ const Workboard: React.FC = () => {
                           />
                         </div>
                       );
-                    })}
+                    }
+                  )}
                 </div>
               </Col>
             </Row>
