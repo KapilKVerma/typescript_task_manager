@@ -4,8 +4,17 @@ import connectToDb from "./utils/connecttToDb";
 import log from "./utils/logger";
 import router from "./routes";
 import deserializeUser from "./middleware/deserializeUser";
+import cors from "cors";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: config.get<string>("origin"),
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 

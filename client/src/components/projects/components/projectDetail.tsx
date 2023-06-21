@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -6,10 +6,12 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { AiOutlineProject, AiOutlineClose } from "react-icons/ai";
 import { teamMembers } from "../../../models/member.model";
 import { Project } from "../../../models/project.model";
-import { tasks } from "../../../models/task.model";
 import TasksList from "../../tasks/components/tasksList";
+import { Task } from "../../../models/task.model";
 import NewTask from "../../forms/newTask/newTask";
 import dayjs from "dayjs";
+
+import axios from "axios";
 
 interface Props {
   project: Project;
@@ -18,6 +20,21 @@ interface Props {
 
 const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
   const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
+  const [tasksList, setTasksList] = useState<Task[]>([]);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/0.1/tasks/`);
+      setTasksList(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   return (
     <div className="project__card mt-3">
       {/* Card Icon */}
@@ -150,7 +167,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
           {showNewTaskForm ? (
             <NewTask setClose={setShowNewTaskForm} />
           ) : (
-            <TasksList taskList={tasks.slice(0, 5)} />
+            <TasksList taskList={tasksList.slice(0, 5)} />
           )}
         </div>
       </section>

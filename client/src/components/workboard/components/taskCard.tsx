@@ -1,14 +1,36 @@
 import React, { useState } from "react";
-import { Task, TaskStatus } from "../../../models/task.model";
+import Modal from "react-bootstrap/modal";
+import Button from "react-bootstrap/Button";
+import { Task } from "../../../models/task.model";
 import RenderButton from "../../UIComponents/renderButton";
+import EditTask from "../../forms/editTask/editTask";
+import dayjs from "dayjs";
 
 interface Props {
   task: Task;
-  status: string;
+  handleTaskStatus: (task: Task) => void;
 }
 
-const TaskCard: React.FC<Props> = ({ task, status }) => {
+const TaskCard: React.FC<Props> = ({ task, handleTaskStatus }) => {
   const [showMenuItems, setShowMenuItems] = useState<Boolean>(false);
+  const [editTask, setEditTask] = useState<boolean>(false);
+
+  const handleShow = () => setEditTask(true);
+  const handleClose = () => setEditTask(false);
+
+  // Task status change handler
+  const handleChangeStatus = (status: string) => {
+    if (status === "start") {
+      task.inProgress = true;
+      task.completed = false;
+    }
+
+    if (status === "complete") {
+      task.inProgress = false;
+      task.completed = true;
+    }
+    handleTaskStatus(task);
+  };
 
   return (
     <>
@@ -28,44 +50,80 @@ const TaskCard: React.FC<Props> = ({ task, status }) => {
             display: showMenuItems ? "block" : "none",
           }}
         >
-          {status === TaskStatus.notStarted ? (
+          {!task.completed && !task.inProgress ? (
             <>
-              <span onClick={() => setShowMenuItems(false)}>
+              <span
+                onClick={() => {
+                  setShowMenuItems(false);
+                  handleChangeStatus("start");
+                }}
+              >
                 <RenderButton title={"Start"} type={"startButton"} />
               </span>
               <br />
-              <span onClick={() => setShowMenuItems(false)}>
+              <span
+                onClick={() => {
+                  setShowMenuItems(false);
+                  handleShow();
+                }}
+              >
                 <RenderButton title={"Edit"} type={"editButton"} />
               </span>
             </>
           ) : null}
 
-          {status === TaskStatus.inProgress ? (
+          {!task.completed && task.inProgress ? (
             <>
-              <span onClick={() => setShowMenuItems(false)}>
+              <span
+                onClick={() => {
+                  setShowMenuItems(false);
+                  handleChangeStatus("complete");
+                }}
+              >
                 <RenderButton title={"Complete"} type={"completeButton"} />
               </span>
               <br />
-              <span onClick={() => setShowMenuItems(false)}>
+              <span
+                onClick={() => {
+                  setShowMenuItems(false);
+                  handleShow();
+                }}
+              >
                 <RenderButton title={"Edit"} type={"editButton"} />
               </span>
             </>
           ) : null}
 
-          {status === TaskStatus.completed ? (
+          {task.completed && !task.inProgress ? (
             <>
-              <span onClick={() => setShowMenuItems(false)}>
+              <span
+                onClick={() => {
+                  setShowMenuItems(false);
+                  handleChangeStatus("start");
+                }}
+              >
                 <RenderButton title={"Start"} type={"startButton"} />
               </span>
             </>
           ) : null}
         </div>
       </h6>
+      {/* Body */}
       <p>{task.description}</p>
       <p>
         Due Date:&nbsp;&nbsp;
-        {new Date(task.endDate).toLocaleDateString()}
+        {dayjs(task.endDate).format("DD/MM/YYYY")}
       </p>
+
+      {/* Update Modal */}
+      <Modal size="lg" show={editTask} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title className="text-capitalize">Edit task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-0">
+          <EditTask task={task} setEditTask={setEditTask} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

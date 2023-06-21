@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import AppWrapper from "../wrapperComponents/appWrapper";
 import { Task } from "../../models/task.model";
-import { tasks } from "../../models/task.model";
 import TasksList from "./components/tasksList";
 import TasksTable from "./components/tasksTable";
 import NewTask from "../forms/newTask/newTask";
+import axios from "axios";
 
 enum taskCategory {
   today,
@@ -17,29 +17,20 @@ enum taskCategory {
 const cDate = new Date(); // Current Date
 
 const Tasks: React.FC = () => {
-  const [taskList, setTaskList] = useState<Task[]>(
-    tasks.filter((task: Task) => {
-      if (new Date(task.startDate).toDateString() === cDate.toDateString()) {
-        return task;
-      }
-    })
-  );
+  const [tasksList, setTasksList] = useState<Task[]>([]);
   const [activeButton, setActiveButton] = useState<number>(0);
   const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
 
-  const todaysTasksCalculator = useCallback(
-    (tasks: Task[]): number => {
-      // Filter tasks that have their startDate matching the current date
-      const todayTasks = tasks.filter((task: Task) => {
-        if (new Date(task.startDate).toDateString() === cDate.toDateString()) {
-          return task; // Include task in the filtered array
-        }
-      });
+  const todaysTasksCalculator = (tasks: Task[]): number => {
+    // Filter tasks that have their startDate matching the current date
+    const todayTasks = tasks.filter((task: Task) => {
+      if (task.startDate === cDate) {
+        return task; // Include task in the filtered array
+      }
+    });
 
-      return todayTasks.length; // Return the count of tasks with start dates matching the current date
-    },
-    [tasks] // Dependency array specifying the tasks parameter
-  );
+    return todayTasks.length; // Return the count of tasks with start dates matching the current date
+  };
 
   const tasksCalculator = (tasks: Task[], completed: boolean): number => {
     // Filter tasks based on the completion status
@@ -54,7 +45,7 @@ const Tasks: React.FC = () => {
 
     if (category === taskCategory.today)
       result = tasks.filter((task: Task) => {
-        if (new Date(task.startDate).toDateString() === cDate.toDateString()) {
+        if (task.startDate === cDate) {
           return task;
         }
       });
@@ -65,7 +56,7 @@ const Tasks: React.FC = () => {
     if (category === taskCategory.completed)
       result = tasks.filter((task: Task) => task.completed === true);
 
-    setTaskList(result);
+    setTasksList(result);
   };
 
   const hanldeClick = (tasks: Task[], category: number) => {
@@ -79,6 +70,19 @@ const Tasks: React.FC = () => {
     setShowNewTaskForm(false);
   };
 
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/0.1/tasks/`);
+      setTasksList(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   return (
     <>
       <AppWrapper>
@@ -89,36 +93,36 @@ const Tasks: React.FC = () => {
               variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.today ? true : false}
-              onClick={() => hanldeClick(tasks, taskCategory.today)}
+              onClick={() => hanldeClick(tasksList, taskCategory.today)}
             >
-              Today's ({todaysTasksCalculator(tasks)})
+              Today's ({todaysTasksCalculator(tasksList)})
             </Button>
             <div className="m-1"></div>
             <Button
               variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.remaining ? true : false}
-              onClick={() => hanldeClick(tasks, taskCategory.remaining)}
+              onClick={() => hanldeClick(tasksList, taskCategory.remaining)}
             >
-              Remaining ({tasksCalculator(tasks, false)})
+              Remaining ({tasksCalculator(tasksList, false)})
             </Button>
             <div className="m-1"></div>
             <Button
               variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.completed ? true : false}
-              onClick={() => hanldeClick(tasks, taskCategory.completed)}
+              onClick={() => hanldeClick(tasksList, taskCategory.completed)}
             >
-              Completed ({tasksCalculator(tasks, true)})
+              Completed ({tasksCalculator(tasksList, true)})
             </Button>
             <div className="m-1"></div>
             <Button
               variant="outline-dark"
               className="category__button"
               active={activeButton === taskCategory.showAll ? true : false}
-              onClick={() => hanldeClick(tasks, taskCategory.showAll)}
+              onClick={() => hanldeClick(tasksList, taskCategory.showAll)}
             >
-              Show All ({tasks.length})
+              Show All ({tasksList.length})
             </Button>
           </div>
 
@@ -142,10 +146,10 @@ const Tasks: React.FC = () => {
 
         {/* Tasks List */}
         <div>
-          {activeButton !== taskCategory.showAll ? (
-            <TasksList taskList={taskList} />
+          {activeButton !== taskCategory.showAll && tasksList ? (
+            <TasksList taskList={tasksList} />
           ) : (
-            <TasksTable tasks={taskList} />
+            <TasksTable tasks={tasksList} />
           )}
         </div>
       </AppWrapper>

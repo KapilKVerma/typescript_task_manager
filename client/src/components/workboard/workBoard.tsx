@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import AppWrapper from "../wrapperComponents/appWrapper";
 import TaskCard from "./components/taskCard";
-import { tasks, TaskStatus } from "../../models/task.model";
+import { Task } from "../../models/task.model";
 import { projects } from "../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
+import axios from "axios";
 
 const Workboard: React.FC = () => {
+  const [tasksList, setTasksList] = useState<Task[]>([]);
+
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/0.1/tasks/`);
+      setTasksList(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  const handleTaskStatus = (task: Task) => {
+    let tasks = [...tasksList];
+    const taskIndex = tasks.findIndex((item) => item.id === task.id);
+    tasks[taskIndex] = task;
+    setTasksList(tasks);
+  };
+
   return (
     <>
       <AppWrapper>
@@ -35,47 +58,65 @@ const Workboard: React.FC = () => {
             <Row>
               <Col lg={4} md={4} sm={4} className="p-1">
                 <div className="workboard__tasks__list--container">
-                  {tasks.slice(0, 7).map((task, index) => {
-                    return (
-                      <div
-                        className="task__card mb-2 pb-1"
-                        key={index}
-                        style={{ borderLeft: "5px solid rgb(80,150,247)" }}
-                      >
-                        <TaskCard task={task} status={TaskStatus.notStarted} />
-                      </div>
-                    );
-                  })}
+                  {tasksList
+                    .filter((task) => !task.completed && !task.inProgress)
+                    .sort((a, b) => (a.endDate < b.endDate ? -1 : 1))
+                    .map((task, index) => {
+                      return (
+                        <div
+                          className="task__card mb-2 pb-1"
+                          key={index}
+                          style={{ borderLeft: "5px solid rgb(80,150,247)" }}
+                        >
+                          <TaskCard
+                            task={task}
+                            handleTaskStatus={handleTaskStatus}
+                          />
+                        </div>
+                      );
+                    })}
                 </div>
               </Col>
               <Col lg={4} md={4} sm={4} className="p-1">
                 <div className="workboard__tasks__list--container">
-                  {tasks.slice(7, 9).map((task, index) => {
-                    return (
-                      <div
-                        className="task__card mb-2 pb-1"
-                        key={index}
-                        style={{ borderLeft: "5px solid rgb(251,129,55)" }}
-                      >
-                        <TaskCard task={task} status={TaskStatus.inProgress} />
-                      </div>
-                    );
-                  })}
+                  {tasksList
+                    .filter((task) => !task.completed && task.inProgress)
+                    .sort((a, b) => (a.endDate < b.endDate ? -1 : 1))
+                    .map((task, index) => {
+                      return (
+                        <div
+                          className="task__card mb-2 pb-1"
+                          key={index}
+                          style={{ borderLeft: "5px solid rgb(251,129,55)" }}
+                        >
+                          <TaskCard
+                            task={task}
+                            handleTaskStatus={handleTaskStatus}
+                          />
+                        </div>
+                      );
+                    })}
                 </div>
               </Col>
               <Col lg={4} md={4} sm={4} className="p-1">
                 <div className="workboard__tasks__list--container">
-                  {tasks.slice(1, 3).map((task, index) => {
-                    return (
-                      <div
-                        className="task__card mb-2 pb-1"
-                        key={index}
-                        style={{ borderLeft: "5px solid rgb(23,195,165)" }}
-                      >
-                        <TaskCard task={task} status={TaskStatus.completed} />
-                      </div>
-                    );
-                  })}
+                  {tasksList
+                    .filter((task) => task.completed && !task.inProgress)
+                    .sort((a, b) => (a.endDate < b.endDate ? -1 : 1))
+                    .map((task, index) => {
+                      return (
+                        <div
+                          className="task__card mb-2 pb-1"
+                          key={index}
+                          style={{ borderLeft: "5px solid rgb(23,195,165)" }}
+                        >
+                          <TaskCard
+                            task={task}
+                            handleTaskStatus={handleTaskStatus}
+                          />
+                        </div>
+                      );
+                    })}
                 </div>
               </Col>
             </Row>

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import { MdOutlineTask } from "react-icons/md";
 import { Task } from "../../../models/task.model";
 import { teamMembers } from "../../../models/member.model";
 import RenderButton from "../../UIComponents/renderButton";
+import EditTask from "../../forms/editTask/editTask";
+import dayjs from "dayjs";
 
 interface Props {
   task: Task;
 }
 
 const TaskDetail: React.FC<Props> = ({ task }) => {
-  const [showDetails, setShowDetails] = useState<Boolean>(false);
-  const [showMenuItems, setShowMenuItems] = useState<Boolean>(false);
-  const [editTask, setEditTask] = useState<Boolean>(false);
+  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [showMenuItems, setShowMenuItems] = useState<boolean>(false);
+  const [editTask, setEditTask] = useState<boolean>(false);
 
   const member1 = teamMembers[8];
   const member2 = teamMembers[4];
@@ -70,10 +71,12 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
                     style={{ listStyleType: "none" }}
                   >
                     <li style={attributeTag}>
-                      Start Date:&nbsp;&nbsp;{task.endDate.toDateString()}
+                      Start Date:&nbsp;&nbsp;
+                      {dayjs(task.endDate).format("DD/MM/YYYY")}
                     </li>
                     <li style={attributeTag}>
-                      Created On:&nbsp;&nbsp;{task.createdOn.toDateString()}
+                      Created On:&nbsp;&nbsp;
+                      {dayjs(task.createdOn).format("DD/MM/YYYY")}
                     </li>
                     <li style={attributeTag}>
                       Created By:&nbsp;&nbsp;
@@ -134,83 +137,7 @@ const TaskDetail: React.FC<Props> = ({ task }) => {
       ) : null}
 
       {/* Edit form */}
-      {editTask ? (
-        <form className="object__form">
-          <section className="mb-3">
-            <div className="input__field mb-3">
-              <label>Task Title:</label>
-              <br></br>
-              <input
-                type="text"
-                name="title"
-                defaultValue={task.title}
-                placeholder="Enter Task title"
-                className="input__field--text"
-                // value={newTaskState?.title}
-                // onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="input__field mb-3">
-              <label>Task Description:</label>
-              <br></br>
-              <textarea
-                name="description"
-                rows={2}
-                defaultValue={task.description}
-                placeholder="Enter Task Description"
-                className="input__field--text"
-                // value={newTaskState?.description}
-                // onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="d-flex flex-row justify-content-between mb-3">
-              <div className="input__field w-50">
-                <label>Start Date:</label>
-                <input
-                  type="date"
-                  name="startDate"
-                  className="input__field--date"
-                  // onChange={handleDateChange}
-                />
-              </div>
-              <div className="m-2"></div>
-              <div className="input__field w-50">
-                <label>Completion Date:</label>
-                <input
-                  type="date"
-                  name="endDate"
-                  className="input__field--date"
-                  // onChange={handleDateChange}
-                />
-              </div>
-            </div>
-          </section>
-
-          <section>
-            <div className="d-flex flex-row justify-content-end">
-              <Button
-                variant="outline-info"
-                type="submit"
-                className="form__button"
-                onClick={() => setEditTask(false)}
-              >
-                Close
-              </Button>
-              <div className="m-1"></div>
-              <Button
-                variant="info"
-                type="submit"
-                className="form__button"
-                // onClick={submitNewTask}
-              >
-                Save
-              </Button>
-            </div>
-          </section>
-        </form>
-      ) : null}
+      {editTask ? <EditTask task={task} setEditTask={setEditTask} /> : null}
     </>
   );
 };
