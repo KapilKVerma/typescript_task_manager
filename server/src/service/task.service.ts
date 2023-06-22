@@ -10,7 +10,7 @@ type Task = {
   active: boolean;
 };
 
-export let tasks: Task[] = [
+let tasks: Task[] = [
   {
     id: 1,
     title:
@@ -135,7 +135,7 @@ export let tasks: Task[] = [
     createdOn: new Date("2023-05-23"),
     inProgress: false,
     completed: false,
-    active: true,
+    active: false,
   },
   {
     id: 12,
@@ -249,7 +249,7 @@ export let tasks: Task[] = [
     createdOn: new Date("2023-05-23"),
     inProgress: false,
     completed: false,
-    active: true,
+    active: false,
   },
   {
     id: 22,

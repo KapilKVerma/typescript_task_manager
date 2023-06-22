@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { projects } from "../../../models/project.model";
+import { Project } from "../../../models/project.model";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { string, object, number, TypeOf } from "zod";
+
+import { serverUrl } from "../../../serverUrl";
+import axios from "axios";
 
 const newTaskSchema = object({
   title: string().nonempty("Title is required"),
@@ -24,6 +27,8 @@ interface Props {
 }
 
 const NewTask: React.FC<Props> = ({ setClose }) => {
+  const [projects, setProjects] = useState<Project[]>([]);
+
   const {
     register,
     handleSubmit,
@@ -42,6 +47,20 @@ const NewTask: React.FC<Props> = ({ setClose }) => {
   const sumbit = (d: any) => {
     console.log(d);
   };
+
+  // Fetch Projects
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/0.1/projects/`);
+      setProjects(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   return (
     <>

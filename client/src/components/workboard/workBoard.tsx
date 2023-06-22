@@ -5,7 +5,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import AppWrapper from "../wrapperComponents/appWrapper";
 import TaskCard from "./components/taskCard";
 import { Task } from "../../models/task.model";
-import { projects } from "../../models/project.model";
+import { Project } from "../../models/project.model";
 import { AiOutlineProject } from "react-icons/ai";
 import { serverUrl } from "../../serverUrl";
 import axios from "axios";
@@ -18,6 +18,7 @@ enum taskFilters {
 
 const Workboard: React.FC = () => {
   const [tasksList, setTasksList] = useState<Task[]>([]);
+  const [projectsList, setProjectsList] = useState<Project[]>([]);
 
   // Tasks filter handler
   const filterTasks = (tasks: Task[], status: number): Task[] => {
@@ -48,18 +49,26 @@ const Workboard: React.FC = () => {
   };
 
   // Fetch Tasks
-  const fetchTasks = async () => {
+  const fetchData = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/0.1/tasks/`);
-      const tasks = response.data.filter((item: Task) => item.active === true);
-      setTasksList(tasks);
+      const apiCalls = [
+        axios.get(`${serverUrl}/api/0.1/tasks/`), // fetch tasks
+        axios.get(`${serverUrl}/api/0.1/projects/`), // fetch projects
+      ];
+
+      const responses = await Promise.all(apiCalls);
+
+      setTasksList(
+        responses[0].data.filter((item: Task) => item.active === true)
+      );
+      setProjectsList(responses[1].data);
     } catch (err: any) {
       console.log(err.message);
     }
   };
 
   useEffect(() => {
-    fetchTasks();
+    fetchData();
   }, []);
 
   return (
@@ -165,7 +174,7 @@ const Workboard: React.FC = () => {
               <h5>Assigned Project(s)</h5>
             </div>
             <div>
-              {projects.slice(0, 2).map((project, index) => {
+              {projectsList.slice(0, 2).map((project, index) => {
                 return (
                   <div key={index} className="mt-5">
                     <div className="project__card">

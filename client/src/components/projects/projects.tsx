@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AppWrapper from "../wrapperComponents/appWrapper";
-import { Project, projects } from "../../models/project.model";
+import { Project } from "../../models/project.model";
 import ProjectsHeader from "./components/projectsHeader";
 import ProjectCard from "./components/projectCard";
 import ProjectDetail from "./components/projectDetail";
+import { serverUrl } from "../../serverUrl";
+import axios from "axios";
 
 const Projects: React.FC = () => {
   const [projectDetail, setProjectDetail] = useState<Project | null>(null);
   const [showNewProjectForm, setShowNewProjectForm] = useState<boolean>(false);
-  const [projectsToShow, setProjectsToShow] = useState<Project[]>(projects);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [projectsToShow, setProjectsToShow] = useState<Project[]>([]);
+
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/0.1/projects`);
+      setProjects(response.data);
+      setProjectsToShow(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   return (
     <>
