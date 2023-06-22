@@ -136,7 +136,7 @@ const TimeLine = () => {
         <div style={{ backgroundColor: "rgba(255,255,255)" }}>
           <Gantt
             tasks={tasks}
-            viewMode={ViewMode.Year}
+            viewMode={ViewMode.Month}
             listCellWidth={""}
             onExpanderClick={handleExpanderClick}
             columnWidth={100}
