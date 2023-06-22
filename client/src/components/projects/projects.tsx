@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import AppWrapper from "../wrapperComponents/appWrapper";
@@ -11,7 +11,6 @@ import axios from "axios";
 
 const Projects: React.FC = () => {
   const [projectDetail, setProjectDetail] = useState<Project | null>(null);
-  const [showNewProjectForm, setShowNewProjectForm] = useState<boolean>(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [projectsToShow, setProjectsToShow] = useState<Project[]>([]);
 
@@ -36,8 +35,6 @@ const Projects: React.FC = () => {
         <section>
           <ProjectsHeader
             projectDetail={projectDetail}
-            showForm={showNewProjectForm}
-            setShowForm={setShowNewProjectForm}
             projectsList={projects}
             setProjectsToShow={setProjectsToShow}
           />
@@ -53,7 +50,6 @@ const Projects: React.FC = () => {
                     <ProjectCard
                       project={project}
                       setProjectDetail={setProjectDetail}
-                      setShowForm={setShowNewProjectForm}
                     />
                   </Col>
                 );

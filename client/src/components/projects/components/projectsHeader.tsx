@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { Project } from "../../../models/project.model";
 import { AiOutlineSearch } from "react-icons/ai";
 import NewProject from "../../forms/newProject/newProject";
@@ -7,16 +8,19 @@ import NewProject from "../../forms/newProject/newProject";
 interface Props {
   projectsList: Project[];
   projectDetail: Project | null;
-  showForm: boolean;
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   setProjectsToShow: React.Dispatch<React.SetStateAction<Project[]>>;
 }
 
 const ProjectsHeader: React.FC<Props> = (props) => {
-  const { projectsList, projectDetail, showForm } = props;
-  const { setShowForm, setProjectsToShow } = props;
+  const { projectsList, projectDetail } = props;
+  const { setProjectsToShow } = props;
 
-  const filterProjectsList = (value: string, projectsList: Project[]) => {
+  const [show, setShow] = useState<boolean>(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Search projects handler
+  const searchProjectsHandler = (value: string, projectsList: Project[]) => {
     let result = projectsList.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())
     );
@@ -29,48 +33,49 @@ const ProjectsHeader: React.FC<Props> = (props) => {
         {/* Title and Search  */}
         <section className="w-50">
           {!projectDetail && (
-            <div>
-              <form className="search__bar">
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Enter project name..."
-                  className="search__bar---input"
-                  onChange={(e) => {
-                    filterProjectsList(e.target.value, projectsList);
-                  }}
-                />
-                <Button
-                  variant="dark"
-                  type="submit"
-                  className="search__bar---button"
-                >
-                  <AiOutlineSearch size="1.25rem" />
+            <div className="w-75 d-flex flex-row justify-content-start">
+              <div>
+                <form className="search__bar">
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder="Enter project name..."
+                    className="search__bar---input"
+                    onChange={(e) => {
+                      searchProjectsHandler(e.target.value, projectsList);
+                    }}
+                  />
+                  <Button
+                    variant="dark"
+                    type="submit"
+                    className="search__bar---button"
+                  >
+                    <AiOutlineSearch size="1.25rem" />
+                  </Button>
+                </form>
+              </div>
+              <div className="m-2"></div>
+              <div>
+                <Button variant="info" onClick={handleShow}>
+                  {show ? <span>Close</span> : <span>New Project</span>}
                 </Button>
-              </form>
+              </div>
             </div>
           )}
         </section>
 
-        {/* New Project  */}
-        <section
-          className="w-50  d-flex flex-row justify-content-end"
-          style={{ position: "relative" }}
-        >
-          {!projectDetail && (
-            <>
-              <Button variant="info" onClick={() => setShowForm(!showForm)}>
-                {showForm ? <span>Close</span> : <span>New Project</span>}
-              </Button>
-              {showForm ? (
-                <div className="new__project__container">
-                  <NewProject setClose={setShowForm} />
-                </div>
-              ) : null}
-            </>
-          )}
-        </section>
+        <section className="w-50 d-flex flex-row justify-content-end"></section>
       </div>
+
+      {/* New Project  */}
+      <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>New Project</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-0">
+          <NewProject setClose={handleClose} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

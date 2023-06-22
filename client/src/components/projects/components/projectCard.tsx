@@ -12,11 +12,10 @@ import dayjs from "dayjs";
 interface Props {
   project: Project;
   setProjectDetail: React.Dispatch<React.SetStateAction<Project | null>>;
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ProjectCard: React.FC<Props> = (props) => {
-  const { project, setProjectDetail, setShowForm } = props;
+  const { project, setProjectDetail } = props;
   return (
     <>
       <ProjectCardWrapper>
@@ -30,10 +29,7 @@ const ProjectCard: React.FC<Props> = (props) => {
             <Button
               size="sm"
               variant="light"
-              onClick={() => {
-                setProjectDetail(project);
-                setShowForm(false);
-              }}
+              onClick={() => setProjectDetail(project)}
               style={{ position: "absolute", right: "0" }}
             >
               <HiOutlineMenuAlt2 size={"1.25rem"} />
@@ -69,6 +65,7 @@ const ProjectCard: React.FC<Props> = (props) => {
           </Row>
           <hr />
 
+          {/* Assinged Team Members */}
           <section className="mb-3">
             <h6>Team Member(s)</h6>
             <Row className="member__skills--list m-0 p-0">
@@ -88,6 +85,7 @@ const ProjectCard: React.FC<Props> = (props) => {
             </Row>
           </section>
 
+          {/* Assigned Project Managers */}
           <section>
             <h6>Project Manager(s)</h6>
             <Row className="member__skills--list m-0 p-0">

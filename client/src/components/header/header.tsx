@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { MdNotificationsNone, MdOutlineLogout } from "react-icons/md";
 import { SiOpenproject } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
@@ -23,14 +24,16 @@ const Header: React.FC = () => {
             &nbsp;(2)
           </Button>
           <div className="m-1"></div>
-          <Button
-            variant="light"
-            className="font-weight-bold category__button"
-            style={{ borderRadius: "50px" }}
-          >
-            <MdOutlineLogout size={"1.25rem"} />
-            &nbsp;&nbsp;Logout
-          </Button>
+          <Link to="/">
+            <Button
+              variant="light"
+              className="font-weight-bold category__button"
+              style={{ borderRadius: "50px" }}
+            >
+              <MdOutlineLogout size={"1.25rem"} />
+              &nbsp;&nbsp;Logout
+            </Button>
+          </Link>
         </ButtonGroup>
         <div
           className="App__header__user--image"

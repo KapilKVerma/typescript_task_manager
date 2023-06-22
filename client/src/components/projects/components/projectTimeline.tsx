@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import AppWrapper from "../wrapperComponents/appWrapper";
 
 import { Gantt, Task, ViewMode } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
 
+interface Props {
+  monthViewMode: boolean;
+}
+
 let tasksList: Task[] = [
   {
     start: new Date(2023, 0, 1),
-    end: new Date(2023, 4, 18),
+    end: new Date(2023, 0, 18),
     name: "Network Infrastructure Upgrade",
     id: "project 1",
     type: "project",
@@ -75,54 +78,9 @@ let tasksList: Task[] = [
     project: "project 1",
     styles: { progressColor: "#5096F7", progressSelectedColor: "#5096F7" },
   },
-  {
-    start: new Date(2023, 0, 1),
-    end: new Date(2023, 2, 18),
-    name: "Infrastructure Upgrade",
-    id: "project 2",
-    type: "project",
-    progress: 100,
-    isDisabled: true,
-    hideChildren: false,
-    styles: { progressColor: "#17C3A5", progressSelectedColor: "#17C3A5" },
-  },
-  {
-    start: new Date(2023, 2, 1),
-    end: new Date(2023, 6, 25),
-    name: "Infrastructure Upgrade",
-    id: "project 3",
-    type: "project",
-    progress: 100,
-    isDisabled: true,
-    hideChildren: false,
-    styles: { progressColor: "#17C3A5", progressSelectedColor: "#17C3A5" },
-  },
-
-  {
-    start: new Date(2023, 4, 15),
-    end: new Date(2023, 7, 25),
-    name: "Infrastructure Upgrade",
-    id: "project 4",
-    type: "project",
-    progress: 100,
-    isDisabled: true,
-    hideChildren: false,
-    styles: { progressColor: "#17C3A5", progressSelectedColor: "#17C3A5" },
-  },
-  {
-    start: new Date(2023, 8, 5),
-    end: new Date(2024, 0, 25),
-    name: "Infrastructure Upgrade",
-    id: "project 5",
-    type: "project",
-    progress: 100,
-    isDisabled: true,
-    hideChildren: false,
-    styles: { progressColor: "#17C3A5", progressSelectedColor: "#17C3A5" },
-  },
 ];
 
-const TimeLine = () => {
+const ProjectTimeline: React.FC<Props> = ({ monthViewMode }) => {
   const [tasks, setTasks] = useState<Task[]>(tasksList);
 
   const handleExpanderClick = (task: Task) => {
@@ -132,19 +90,17 @@ const TimeLine = () => {
 
   return (
     <>
-      <AppWrapper>
-        <div style={{ backgroundColor: "rgba(255,255,255)" }}>
-          <Gantt
-            tasks={tasks}
-            viewMode={ViewMode.Year}
-            listCellWidth={""}
-            onExpanderClick={handleExpanderClick}
-            columnWidth={100}
-          />
-        </div>
-      </AppWrapper>
+      <div style={{ background: "#fff" }}>
+        <Gantt
+          tasks={tasks}
+          viewMode={monthViewMode ? ViewMode.Month : ViewMode.Day}
+          listCellWidth={""}
+          onExpanderClick={handleExpanderClick}
+          columnWidth={100}
+        />
+      </div>
     </>
   );
 };
 
-export default TimeLine;
+export default ProjectTimeline;

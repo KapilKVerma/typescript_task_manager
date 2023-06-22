@@ -15,7 +15,6 @@ enum taskCategory {
 const Tasks: React.FC = () => {
   const [tasksList, setTasksList] = useState<Task[]>([]);
   const [tasksToShow, setTasksToShow] = useState<Task[]>([]);
-  const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
   const [activeButton, setActiveButton] = useState<number>(
     taskCategory.inactive
   );
@@ -39,7 +38,6 @@ const Tasks: React.FC = () => {
   const handleFilterTask = (tasks: Task[], category: number) => {
     filterTasks(tasks, category);
     setActiveButton(category);
-    setShowNewTaskForm(false);
   };
 
   // Task active status handler
@@ -93,8 +91,7 @@ const Tasks: React.FC = () => {
             activeButton={activeButton}
             handleFilterTask={handleFilterTask}
             tasksList={tasksList}
-            showNewTaskForm={showNewTaskForm}
-            setShowNewTaskForm={setShowNewTaskForm}
+            setTasksToShow={setTasksToShow}
           />
         </section>
 

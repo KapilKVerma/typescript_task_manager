@@ -17,7 +17,7 @@ const NavBar: React.FC<Props> = (props) => {
     <>
       {navLinks.map((link, index) => {
         return (
-          <Link to={link.path}>
+          <Link to={link.path} key={index}>
             <Button
               variant="light"
               className="w-100 mb-2 p-3"

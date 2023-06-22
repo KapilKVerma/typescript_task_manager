@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { Task } from "../../../models/task.model";
+import { AiOutlineSearch } from "react-icons/ai";
 import NewTask from "../../forms/newTask/newTask";
 
 interface Props {
   activeButton: number;
   handleFilterTask: (tasks: Task[], category: number) => void;
   tasksList: Task[];
-  showNewTaskForm: boolean;
-  setShowNewTaskForm: React.Dispatch<React.SetStateAction<boolean>>;
+  setTasksToShow: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
 enum taskCategory {
@@ -19,7 +20,11 @@ enum taskCategory {
 
 const TasksHeader: React.FC<Props> = (props) => {
   const { activeButton, handleFilterTask, tasksList } = props;
-  const { showNewTaskForm, setShowNewTaskForm } = props;
+  const { setTasksToShow } = props;
+
+  const [show, setShow] = useState<boolean>(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // Tasks count handler
   const handleTasksCount = (tasks: Task[], completed: boolean): number => {
@@ -34,10 +39,18 @@ const TasksHeader: React.FC<Props> = (props) => {
     return result.length;
   };
 
+  // Search projects handler
+  const searchTasksHandler = (value: string, tasksList: Task[]) => {
+    let result = tasksList.filter((item) =>
+      item.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setTasksToShow(result);
+  };
+
   return (
     <>
       <div className="d-flex flex-row justify-content-between mb-3">
-        <div className="w-50 d-flex flex-row justify-content-start">
+        <div className="w-75 d-flex flex-row justify-content-start">
           <Button
             variant="outline-dark"
             className="category__button"
@@ -64,25 +77,51 @@ const TasksHeader: React.FC<Props> = (props) => {
           >
             Show All ({tasksList.length})
           </Button>
+          <div className="m-2"></div>
+          <div>
+            <form className="search__bar">
+              <input
+                type="text"
+                name="title"
+                placeholder="Enter task name..."
+                className="search__bar---input"
+                onChange={(e) => {
+                  searchTasksHandler(e.target.value, tasksList);
+                }}
+              />
+              <Button
+                variant="dark"
+                type="submit"
+                className="search__bar---button"
+              >
+                <AiOutlineSearch size="1.25rem" />
+              </Button>
+            </form>
+          </div>
+          <div className="m-2"></div>
+          <div>
+            <Button variant="info" onClick={handleShow}>
+              {show ? <span>Close</span> : <span>New Task</span>}
+            </Button>
+          </div>
         </div>
 
-        <div
-          className="w-50  d-flex flex-row justify-content-end"
-          style={{ position: "relative" }}
-        >
-          <Button
-            variant="info"
-            onClick={() => setShowNewTaskForm(!showNewTaskForm)}
-          >
-            {showNewTaskForm ? <span>Close</span> : <span>New Task</span>}
+        <div className="w-25 d-flex flex-row justify-content-end">
+          <Button variant="outline-dark" style={{ border: "none" }} disabled>
+            Showing 14 of 30
           </Button>
-          {showNewTaskForm ? (
-            <div className="new__task__container">
-              <NewTask setClose={setShowNewTaskForm} />
-            </div>
-          ) : null}
         </div>
       </div>
+
+      {/* New Task  */}
+      <Modal size="lg" show={show} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>New Task</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="p-0">
+          <NewTask setClose={handleClose} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };

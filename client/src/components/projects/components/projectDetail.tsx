@@ -12,6 +12,7 @@ import TaskDetail from "./taskDetail";
 import dayjs from "dayjs";
 import { serverUrl } from "../../../serverUrl";
 import axios from "axios";
+import ProjectTimeline from "./projectTimeline";
 
 interface Props {
   project: Project;
@@ -21,6 +22,7 @@ interface Props {
 const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
   const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
   const [tasksList, setTasksList] = useState<Task[]>([]);
+  const [monthViewMode, setMonthViewMode] = useState<boolean>(true);
 
   // Delete task handler
   const handleDeleteTask = async (task: Task) => {
@@ -155,6 +157,32 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             </section>
           </Col>
         </Row>
+        <hr />
+      </section>
+
+      {/* Project Time Line */}
+      <section>
+        <div className="mb-3 d-flex flex-row justify-content-between">
+          <h5>Timeline</h5>
+          <div className="d-flex flex-row justify-content-end">
+            <Button
+              variant={monthViewMode ? "dark" : "light"}
+              size="sm"
+              onClick={() => setMonthViewMode(true)}
+            >
+              Month
+            </Button>
+            <div className="m-1"></div>
+            <Button
+              variant={!monthViewMode ? "dark" : "light"}
+              size="sm"
+              onClick={() => setMonthViewMode(false)}
+            >
+              Day
+            </Button>
+          </div>
+        </div>
+        <ProjectTimeline monthViewMode={monthViewMode} />
         <hr />
       </section>
 
