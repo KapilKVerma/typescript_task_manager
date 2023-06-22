@@ -162,7 +162,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
 
       {/* Project Time Line */}
       <section>
-        <div className="mb-3 d-flex flex-row justify-content-between">
+        <div className="mb-2 d-flex flex-row justify-content-between">
           <h5>Timeline</h5>
           <div className="d-flex flex-row justify-content-end">
             <Button
