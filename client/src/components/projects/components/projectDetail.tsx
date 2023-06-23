@@ -3,17 +3,18 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { AiOutlineProject, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineProject } from "react-icons/ai";
 import RenderButton from "../../UIComponents/renderButton";
-import { teamMembers } from "../../../models/member.model";
+import { TeamMember } from "../../../models/member.model";
 import { Project } from "../../../models/project.model";
 import { Task } from "../../../models/task.model";
 import NewTask from "../../forms/newTask/newTask";
 import TaskDetail from "./taskDetail";
+import ProjectTimeline from "./projectTimeline";
 import dayjs from "dayjs";
+
 import { serverUrl } from "../../../serverUrl";
 import axios from "axios";
-import ProjectTimeline from "./projectTimeline";
 
 interface Props {
   project: Project;
@@ -24,6 +25,7 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
   const [showNewTaskForm, setShowNewTaskForm] = useState<boolean>(false);
   const [tasksList, setTasksList] = useState<Task[]>([]);
   const [monthViewMode, setMonthViewMode] = useState<boolean>(true);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
 
   // Delete task handler
   const handleDeleteTask = async (task: Task) => {
@@ -40,8 +42,15 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
   // Fetch tasks
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${serverUrl}/api/0.1/tasks/`);
-      setTasksList(response.data);
+      const apiCalls = [
+        axios.get(`${serverUrl}/api/0.1/tasks/`), // Fetch tasks
+        axios.get(`${serverUrl}/api/0.1/users/company/1`), // Fetch Team Members
+      ];
+
+      const responses = await Promise.all(apiCalls);
+
+      setTasksList(responses[0].data);
+      setTeamMembers(responses[1].data);
     } catch (err: any) {
       console.log(err.message);
     }
