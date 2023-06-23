@@ -24,19 +24,30 @@ const TaskDetail: React.FC<Props> = (props) => {
           {/* Menu Button */}
           <section>
             <div className="task__menu--container d-flex flex-row justify-content-start">
-              <span
-                className="mr-1"
-                onClick={() => {
-                  setShowDetails(!showDetails);
-                  setShowMenuItems(false);
-                }}
-              >
-                <RenderButton title={""} type={"expandButton"} />
-              </span>
-
-              <span onClick={() => setShowMenuItems(!showMenuItems)}>
-                <RenderButton title={""} type={"menuButton"} />
-              </span>
+              {!showDetails ? (
+                <>
+                  <span
+                    className="mr-1"
+                    onClick={() => {
+                      setShowDetails(!showDetails);
+                      setShowMenuItems(false);
+                    }}
+                  >
+                    <RenderButton title={""} type={"expandButton"} />
+                  </span>
+                  <span onClick={() => setShowMenuItems(!showMenuItems)}>
+                    <RenderButton title={""} type={"menuButton"} />
+                  </span>
+                </>
+              ) : (
+                <span onClick={() => setShowDetails(!showDetails)}>
+                  <RenderButton
+                    title={""}
+                    type={"closeButton"}
+                    variant="dark"
+                  />
+                </span>
+              )}
             </div>
             <div
               className="task__menu--list"

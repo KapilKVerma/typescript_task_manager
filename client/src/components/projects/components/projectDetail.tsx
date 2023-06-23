@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { AiOutlineProject, AiOutlineClose } from "react-icons/ai";
+import RenderButton from "../../UIComponents/renderButton";
 import { teamMembers } from "../../../models/member.model";
 import { Project } from "../../../models/project.model";
 import { Task } from "../../../models/task.model";
@@ -67,15 +68,9 @@ const ProjectDetail: React.FC<Props> = ({ project, setProjectDetail }) => {
             style={{ position: "relative" }}
           >
             <div className="w-75">{`${project.name}`}</div>
-            <Button
-              size="sm"
-              variant="dark"
-              onClick={() => setProjectDetail(null)}
-              style={{ position: "absolute", right: "0" }}
-            >
-              <AiOutlineClose size={"1.25rem"} />
-            </Button>
-            {/* </Link> */}
+            <span onClick={() => setProjectDetail(null)}>
+              <RenderButton title={""} type={"closeButton"} variant="dark" />
+            </span>
           </h5>
           <h6>Description</h6>
           <p>{`${project.description}`}</p>

@@ -13,7 +13,6 @@ const TaskDetail: React.FC<Props> = (props) => {
   const { task, handleDeleteTask } = props;
 
   const [showDetails, setShowDetails] = useState<boolean>(false);
-  //   const [showMenuItems, setShowMenuItems] = useState<boolean>(false);
   const [editTask, setEditTask] = useState<boolean>(false);
 
   return (
@@ -23,16 +22,27 @@ const TaskDetail: React.FC<Props> = (props) => {
           {/* Menu Button */}
           <section>
             <div className="task__menu--container d-flex flex-row justify-content-start">
-              <span
-                className="mr-1"
-                onClick={() => setShowDetails(!showDetails)}
-              >
-                <RenderButton title={""} type={"expandButton"} />
-              </span>
-
-              <span onClick={() => handleDeleteTask(task)}>
-                <RenderButton title={""} type={"deleteButton"} />
-              </span>
+              {!showDetails ? (
+                <>
+                  <span
+                    className="mr-1"
+                    onClick={() => setShowDetails(!showDetails)}
+                  >
+                    <RenderButton title={""} type={"expandButton"} />
+                  </span>
+                  <span onClick={() => handleDeleteTask(task)}>
+                    <RenderButton title={""} type={"deleteButton"} />
+                  </span>
+                </>
+              ) : (
+                <span onClick={() => setShowDetails(!showDetails)}>
+                  <RenderButton
+                    title={""}
+                    type={"closeButton"}
+                    variant="dark"
+                  />
+                </span>
+              )}
             </div>
           </section>
         </TaskListWrapper>
