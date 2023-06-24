@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineTask } from "react-icons/md";
 import { Task } from "../../../models/task.model";
-import { teamMembers } from "../../../models/member.model";
+import { TeamMember } from "../../../models/member.model";
 import dayjs from "dayjs";
+
+import { serverUrl } from "../../../serverUrl";
+import axios from "axios";
 
 interface Props {
   children: React.ReactNode;
@@ -18,10 +21,25 @@ const attributeTag = {
   fontWeight: "500",
 };
 
-const member1 = teamMembers[8];
-const member2 = teamMembers[4];
-
 const TaskListWrapper: React.FC<Props> = ({ children, task, showDetails }) => {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
+  const member1 = teamMembers[8];
+  const member2 = teamMembers[4];
+
+  const fetchTeamMembers = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/0.1/users/company/1`);
+
+      setTeamMembers(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeamMembers();
+  }, []);
   return (
     <>
       <div style={{ position: "relative", padding: ".7rem" }}>

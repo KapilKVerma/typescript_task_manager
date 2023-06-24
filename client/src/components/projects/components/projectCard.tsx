@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -6,8 +6,11 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { Project } from "../../../models/project.model";
 import ProjectCardWrapper from "../../wrapperComponents/projectCardWrapper";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import { teamMembers } from "../../../models/member.model";
+import { TeamMember } from "../../../models/member.model";
 import dayjs from "dayjs";
+
+import { serverUrl } from "../../../serverUrl";
+import axios from "axios";
 
 interface Props {
   project: Project;
@@ -16,6 +19,22 @@ interface Props {
 
 const ProjectCard: React.FC<Props> = (props) => {
   const { project, setProjectDetail } = props;
+
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
+  const fetchTeamMembers = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/0.1/users/company/1`);
+
+      setTeamMembers(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeamMembers();
+  }, []);
   return (
     <>
       <ProjectCardWrapper>

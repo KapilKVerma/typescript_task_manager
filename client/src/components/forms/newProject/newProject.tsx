@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import {
-  teamMembers,
-  TeamMember,
-  handleFunction,
-} from "../../../models/member.model";
+import { TeamMember, handleFunction } from "../../../models/member.model";
 import SelectMember from "../../UIComponents/selectMember";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { string, object, number, TypeOf } from "zod";
+
+import { serverUrl } from "../../../serverUrl";
+import axios from "axios";
 
 const newProjectSchema = object({
   title: string().nonempty("Title is required"),
@@ -54,6 +53,8 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
   // const [projectTmMembers, setProjectTmMembers] = useState<TeamMember[]>([]);
   // const [tMemberError, setTMemberError] = useState<string>("");
 
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
   const addMember: handleFunction = (value) => {
     let itemsList = [...projectManagers];
 
@@ -94,6 +95,20 @@ const NewProject: React.FC<Props> = ({ setClose }) => {
     data.managers = projectManagers;
     console.log("new project", data);
   };
+
+  const fetchTeamMembers = async () => {
+    try {
+      const response = await axios.get(`${serverUrl}/api/0.1/users/company/1`);
+
+      setTeamMembers(response.data);
+    } catch (err: any) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeamMembers();
+  }, []);
   return (
     <>
       <form className="object__form" onSubmit={handleSubmit(sumbit)}>

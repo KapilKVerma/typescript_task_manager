@@ -201,6 +201,17 @@ export async function getUserHandler(req: Request, res: Response) {
   }
 }
 
+// export async function getUsersHandler(req: Request, res: Response) {
+//   try {
+//     const companyId = req.params.compId;
+//     const companyUsers = await getUsers(companyId);
+//     return res.send(companyUsers);
+//   } catch (e: any) {
+//     logger.error(e);
+//     return res.status(500).send(e.message);
+//   }
+// }
+
 export async function getUsersHandler(req: Request, res: Response) {
   try {
     const companyId = req.params.compId;
