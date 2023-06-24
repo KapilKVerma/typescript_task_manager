@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-<<<<<<< HEAD
-import { teamMembers, TeamMember } from "../../models/member.model";
-=======
-import AppWrapper from "../wrapperComponents/appWrapper";
 import { TeamMember } from "../../models/member.model";
->>>>>>> 6a8838e100496be3209390118814f812abd14f13
 import TeamMembersHeader from "./components/teamMembersHeader";
 import MemberListCard from "../wrapperComponents/teamMember/memberListCard";
 import MemberGridCard from "../wrapperComponents/teamMember/memberGridCard";

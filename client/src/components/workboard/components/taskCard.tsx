@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/modal";
-import Button from "react-bootstrap/Button";
 import { Task } from "../../../models/task.model";
 import RenderButton from "../../UIComponents/renderButton";
 import EditTask from "../../forms/editTask/editTask";
