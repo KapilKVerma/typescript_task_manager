@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AppWrapper from "../wrapperComponents/appWrapper";
 import { Task } from "../../models/task.model";
 import TasksList from "./components/tasksList";
 import { serverUrl } from "../../serverUrl";
@@ -83,28 +82,26 @@ const Tasks: React.FC = () => {
   }, []);
 
   return (
-    <>
-      <AppWrapper>
-        {/* Tasks  Header*/}
-        <section>
-          <TasksHeader
-            activeButton={activeButton}
-            handleFilterTask={handleFilterTask}
-            tasksList={tasksList}
-            setTasksToShow={setTasksToShow}
-          />
-        </section>
+    <React.Fragment>
+      {/* Tasks  Header*/}
+      <section>
+        <TasksHeader
+          activeButton={activeButton}
+          handleFilterTask={handleFilterTask}
+          tasksList={tasksList}
+          setTasksToShow={setTasksToShow}
+        />
+      </section>
 
-        {/* Tasks List */}
-        <section>
-          <TasksList
-            tasksList={tasksToShow}
-            handleTaskActive={handleTaskActive}
-            handleDeleteTask={handleDeleteTask}
-          />
-        </section>
-      </AppWrapper>
-    </>
+      {/* Tasks List */}
+      <section>
+        <TasksList
+          tasksList={tasksToShow}
+          handleTaskActive={handleTaskActive}
+          handleDeleteTask={handleDeleteTask}
+        />
+      </section>
+    </React.Fragment>
   );
 };
 

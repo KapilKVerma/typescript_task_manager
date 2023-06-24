@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { navLink } from "../../models/nav.link";
 import { BiArrowFromRight } from "react-icons/bi";
 import { AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface Props {
   showNavTitles: Boolean;
@@ -13,6 +13,8 @@ interface Props {
 const NavBar: React.FC<Props> = (props) => {
   const { showNavTitles, navLinks, setShowNavTitles } = props;
 
+  const currentLocation = useLocation().pathname;
+
   return (
     <>
       {navLinks.map((link, index) => {
@@ -20,34 +22,36 @@ const NavBar: React.FC<Props> = (props) => {
           <Link to={link.path} key={index}>
             <Button
               variant="light"
-              className="w-100 mb-2 p-3"
+              className="mb-2 p-3 w-100"
               style={{
-                width: `${showNavTitles ? "4rem" : "100%"}`,
-                textAlign: `${showNavTitles ? "left" : "center"}`,
+                textAlign: `left`,
                 fontWeight: "500",
+                padding: "1rem",
+                borderLeft: `${
+                  currentLocation === link.path
+                    ? "2px solid rgb(52,58,64)"
+                    : "2px solid rgb(248,249,250)"
+                }`,
               }}
               key={index}
+              active={currentLocation === link.path ? true : false}
             >
               {link.icon}
-              <div
+              <span
                 className="sidebar__link__title"
-                style={{
-                  fontSize: `${showNavTitles ? "1rem" : "0"}`,
-                }}
+                style={{ fontSize: `${showNavTitles ? "1rem" : "0"}` }}
               >
                 &nbsp;&nbsp;{link.title}
-              </div>
+              </span>
             </Button>
           </Link>
         );
       })}
 
       <Button
-        variant="light"
-        className="p-3 text-center"
-        style={{
-          width: `${showNavTitles ? "4rem" : "100%"}`,
-        }}
+        variant="dark"
+        className="p-3"
+        style={{ width: "3.55rem" }}
         onClick={() => setShowNavTitles(!showNavTitles)}
       >
         {showNavTitles ? (

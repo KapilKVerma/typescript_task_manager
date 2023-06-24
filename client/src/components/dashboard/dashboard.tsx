@@ -1,5 +1,4 @@
 import React from "react";
-import AppWrapper from "../wrapperComponents/appWrapper";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
@@ -155,74 +154,72 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <>
-      <AppWrapper>
-        <Row className="p-0 m-0">
-          <Col lg={10} className="p-0">
-            <Row className="p-0 m-0">
-              {graphs.slice(0, 1).map((graph, index) => {
-                return (
-                  <Col lg={6} md={6} sm={12} key={index} className="p-1">
-                    <div className="graph__card2">
-                      <h5>{`${graph.title}`}</h5>
-                      {graph.component}
-                    </div>
-                  </Col>
-                );
-              })}
-              {graphs.slice(2, 4).map((graph, index) => {
-                return (
-                  <Col lg={3} md={3} sm={6} key={index} className="p-1">
-                    <div className="graph__card2">
-                      <h5>{`${graph.title}`}</h5>
-                      <div className="mt-4">{graph.component}</div>
-                    </div>
-                  </Col>
-                );
-              })}
-              {graphs.slice(0, 2).map((graph, index) => {
-                return (
-                  <Col lg={6} md={6} sm={12} key={index} className="p-1">
-                    <div className="graph__card2">
-                      <h5>{`${graph.title}`}</h5>
-                      {graph.component}
-                    </div>
-                  </Col>
-                );
-              })}
-            </Row>
-          </Col>
-          <Col lg={2} className="p-0">
-            {statistics.map((stat, index) => {
+    <React.Fragment>
+      <Row className="p-0 m-0">
+        <Col lg={10} className="p-0">
+          <Row className="p-0 m-0">
+            {graphs.slice(0, 1).map((graph, index) => {
               return (
-                <div
-                  className="graph__card m-1"
-                  style={{
-                    border: `0.19rem solid ${
-                      stat.status !== "increased"
-                        ? "rgba(231,1,39,.5)"
-                        : "rgba(23,195,165,.5)"
-                    }`,
-                  }}
-                  key={index}
-                >
-                  <h5>{`${stat.title}`}</h5>
-                  <h3>
-                    {stat.status === "increased" ? (
-                      <AiOutlineArrowUp />
-                    ) : (
-                      <AiOutlineArrowDown />
-                    )}
-                    &nbsp;&nbsp;
-                    {stat.percentageChange}%
-                  </h3>
-                </div>
+                <Col lg={6} md={6} sm={12} key={index} className="p-1">
+                  <div className="graph__card2">
+                    <h5>{`${graph.title}`}</h5>
+                    {graph.component}
+                  </div>
+                </Col>
               );
             })}
-          </Col>
-        </Row>
-      </AppWrapper>
-    </>
+            {graphs.slice(2, 4).map((graph, index) => {
+              return (
+                <Col lg={3} md={3} sm={6} key={index} className="p-1">
+                  <div className="graph__card2">
+                    <h5>{`${graph.title}`}</h5>
+                    <div className="mt-4">{graph.component}</div>
+                  </div>
+                </Col>
+              );
+            })}
+            {graphs.slice(0, 2).map((graph, index) => {
+              return (
+                <Col lg={6} md={6} sm={12} key={index} className="p-1">
+                  <div className="graph__card2">
+                    <h5>{`${graph.title}`}</h5>
+                    {graph.component}
+                  </div>
+                </Col>
+              );
+            })}
+          </Row>
+        </Col>
+        <Col lg={2} className="p-0">
+          {statistics.map((stat, index) => {
+            return (
+              <div
+                className="graph__card m-1"
+                style={{
+                  border: `0.19rem solid ${
+                    stat.status !== "increased"
+                      ? "rgba(231,1,39,.5)"
+                      : "rgba(23,195,165,.5)"
+                  }`,
+                }}
+                key={index}
+              >
+                <h5>{`${stat.title}`}</h5>
+                <h3>
+                  {stat.status === "increased" ? (
+                    <AiOutlineArrowUp />
+                  ) : (
+                    <AiOutlineArrowDown />
+                  )}
+                  &nbsp;&nbsp;
+                  {stat.percentageChange}%
+                </h3>
+              </div>
+            );
+          })}
+        </Col>
+      </Row>
+    </React.Fragment>
   );
 };
 

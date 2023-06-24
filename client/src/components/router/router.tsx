@@ -1,5 +1,6 @@
 import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import AppWrapper from "../wrapperComponents/appWrapper";
 
 const Dashboard = lazy(() => import("../dashboard/dashboard"));
 const Projects = lazy(() => import("../projects/projects"));
@@ -24,17 +25,19 @@ const Router: React.FC = () => {
 
   return (
     <>
-      <Routes>
-        {AppRoutes.map((route, index) => {
-          return (
-            <Route
-              path={route.path}
-              element={<route.component />}
-              key={index}
-            />
-          );
-        })}
-      </Routes>
+      <AppWrapper>
+        <Routes>
+          {AppRoutes.map((route, index) => {
+            return (
+              <Route
+                path={route.path}
+                element={<route.component />}
+                key={index}
+              />
+            );
+          })}
+        </Routes>{" "}
+      </AppWrapper>
     </>
   );
 };

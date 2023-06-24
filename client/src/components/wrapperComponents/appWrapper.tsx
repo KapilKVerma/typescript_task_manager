@@ -8,7 +8,7 @@ interface Props {
 }
 
 const AppWrapper: React.FC<Props> = ({ children }) => {
-  const [showNavTitles, setShowNavTitles] = useState<Boolean>(true);
+  const [showNavTitles, setShowNavTitles] = useState<Boolean>(false);
   return (
     <div className="App">
       <div className="App__body">

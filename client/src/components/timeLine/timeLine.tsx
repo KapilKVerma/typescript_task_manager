@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import AppWrapper from "../wrapperComponents/appWrapper";
-
 import { Gantt, Task, ViewMode } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
 
@@ -122,7 +120,7 @@ let tasksList: Task[] = [
   },
 ];
 
-const TimeLine = () => {
+const TimeLine: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>(tasksList);
 
   const handleExpanderClick = (task: Task) => {
@@ -131,19 +129,17 @@ const TimeLine = () => {
   };
 
   return (
-    <>
-      <AppWrapper>
-        <div style={{ backgroundColor: "rgba(255,255,255)" }}>
-          <Gantt
-            tasks={tasks}
-            viewMode={ViewMode.Month}
-            listCellWidth={""}
-            onExpanderClick={handleExpanderClick}
-            columnWidth={100}
-          />
-        </div>
-      </AppWrapper>
-    </>
+    <React.Fragment>
+      <section style={{ backgroundColor: "rgba(255,255,255)" }}>
+        <Gantt
+          tasks={tasks}
+          viewMode={ViewMode.Month}
+          listCellWidth={""}
+          onExpanderClick={handleExpanderClick}
+          columnWidth={100}
+        />
+      </section>
+    </React.Fragment>
   );
 };
 
