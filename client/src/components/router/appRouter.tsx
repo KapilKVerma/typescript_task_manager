@@ -11,7 +11,7 @@ const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
 const TimeLine = lazy(() => import("../timeLine/timeLine"));
 const Admin = lazy(() => import("../admin/admin"));
 
-const Router: React.FC = () => {
+const AppRouter: React.FC = () => {
   const AppRoutes = [
     { path: "/dashboard", component: Dashboard },
     { path: "/projects", component: Projects },
@@ -42,4 +42,4 @@ const Router: React.FC = () => {
   );
 };
 
-export default Router;
+export default AppRouter;

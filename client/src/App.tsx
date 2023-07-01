@@ -1,18 +1,19 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import HomeRouter from "./components/router/homeRouter";
-import Router from "./components/router/router";
+import AppRouter from "./components/router/appRouter";
 
 import "./App.css";
 
 const App: React.FC = () => {
+  const [user, setUser] = useState(false);
+
   const Loading: React.FC = () => <p>Loading ...</p>;
 
   return (
     <BrowserRouter>
       <Suspense fallback={<Loading />}>
-        <HomeRouter />
-        <Router />
+        {!user ? <HomeRouter /> : <AppRouter />}
       </Suspense>
     </BrowserRouter>
   );

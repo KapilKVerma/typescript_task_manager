@@ -32,13 +32,6 @@ const Home: React.FC = () => {
               >
                 Home
               </Button>
-              {/* <Button
-                variant={buttonActive === 1 ? "dark" : "light"}
-                className="form__button"
-                onClick={() => setButtonActive(1)}
-              >
-                About
-              </Button> */}
               <Button
                 variant={buttonActive === 2 ? "dark" : "light"}
                 className="form__button"
