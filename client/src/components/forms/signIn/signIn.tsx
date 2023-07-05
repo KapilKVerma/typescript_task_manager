@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { UserContextType, UserContext } from "../../../context/user.context";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const SignIn: React.FC<Props> = ({ setButtonActive }) => {
+  const { signIn } = useContext<UserContextType>(UserContext);
   const navigate = useNavigate();
 
   const {
@@ -47,6 +49,7 @@ const SignIn: React.FC<Props> = ({ setButtonActive }) => {
 
   const sumbit = (d: any) => {
     console.log(d);
+    signIn();
     navigate("/dashboard");
   };
 

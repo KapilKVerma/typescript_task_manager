@@ -1,5 +1,5 @@
 export default {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3001",
   port: 5001,
   dbUri:
     "mongodb+srv://Kapil12345:Kapil12345@home-dev.9aihyyi.mongodb.net/taskManager",

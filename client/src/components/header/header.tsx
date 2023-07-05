@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { MdNotificationsNone, MdOutlineLogout } from "react-icons/md";
 import { SiOpenproject } from "react-icons/si";
-import { Link } from "react-router-dom";
+import { UserContext, UserContextType } from "../../context/user.context";
 
 const Header: React.FC = () => {
+  const { logOut } = useContext<UserContextType>(UserContext);
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut();
+    navigate("/");
+  };
+
   return (
     <>
       <div className="App__logo">
@@ -24,16 +34,15 @@ const Header: React.FC = () => {
             &nbsp;(2)
           </Button>
           <div className="m-1"></div>
-          <Link to="/">
-            <Button
-              variant="light"
-              className="font-weight-bold category__button"
-              style={{ borderRadius: "50px" }}
-            >
-              <MdOutlineLogout size={"1.25rem"} />
-              &nbsp;&nbsp;Logout
-            </Button>
-          </Link>
+          <Button
+            variant="light"
+            className="font-weight-bold category__button"
+            style={{ borderRadius: "50px" }}
+            onClick={handleLogOut}
+          >
+            <MdOutlineLogout size={"1.25rem"} />
+            &nbsp;&nbsp;Logout
+          </Button>
         </ButtonGroup>
         <div
           className="App__header__user--image"

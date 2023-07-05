@@ -1,14 +1,9 @@
 import { ReactElement } from "react";
 import { BsPersonWorkspace } from "react-icons/bs";
-import {
-  AiOutlineProject,
-  AiOutlineTeam,
-  AiOutlineBuild,
-} from "react-icons/ai";
+import { AiOutlineProject, AiOutlineTeam } from "react-icons/ai";
 import { GrUserAdmin } from "react-icons/gr";
 import {
   MdOutlineDashboard,
-  MdOutlineLogout,
   MdOutlineTask,
   MdOutlineViewTimeline,
 } from "react-icons/md";
@@ -52,17 +47,9 @@ export const navLinks: navLink[] = [
     icon: <AiOutlineTeam size={"1.25rem"} />,
     path: "/teamMembers",
   },
-
-  // {
-  //   title: "Divisions",
-  //   icon: <AiOutlineBuild size={"1.25rem"} />,
-  //   path: "/divisions",
-  // },
   {
     title: "Admin",
     icon: <GrUserAdmin size={"1.25rem"} />,
     path: "/admin",
   },
-
-  { title: "Logout", icon: <MdOutlineLogout size={"1.25rem"} />, path: "/" },
 ];

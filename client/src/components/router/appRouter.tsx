@@ -1,5 +1,5 @@
 import React, { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import AppWrapper from "../wrapperComponents/appWrapper";
 
 const Dashboard = lazy(() => import("../dashboard/dashboard"));
@@ -10,6 +10,7 @@ const Divisions = lazy(() => import("../divisions/divisions"));
 const TeamMembers = lazy(() => import("../teamMembers/teamMembers"));
 const TimeLine = lazy(() => import("../timeLine/timeLine"));
 const Admin = lazy(() => import("../admin/admin"));
+const PageNotFound = lazy(() => import("../pageNotFound/pageNotFound"));
 
 const AppRouter: React.FC = () => {
   const AppRoutes = [
@@ -36,7 +37,7 @@ const AppRouter: React.FC = () => {
               />
             );
           })}
-        </Routes>{" "}
+        </Routes>
       </AppWrapper>
     </>
   );

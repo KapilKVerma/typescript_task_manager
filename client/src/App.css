@@ -88,6 +88,12 @@
   transition: all 0.4s;
 }
 
+.sidebar__link__button {
+  text-align: left;
+  font-weight: 500;
+  padding: 1rem;
+}
+
 .sidebar__link__title {
   display: inline;
   transition: all 0.4s;
